@@ -1,4 +1,5 @@
 <?php
-echo "i am bot A" 
 
+echo "i am bot";
 ?>
+
