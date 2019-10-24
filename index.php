@@ -24,3 +24,4 @@ try {
 } catch (\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
     error_log('parseEventRequest failed. InvalidEventRequestException => ' . var_export($e, true));
 }
+?>
