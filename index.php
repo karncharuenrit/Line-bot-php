@@ -92,7 +92,9 @@ function sentMessage($encodeJson,$datas)
 
 $messages = [];
 $messages['replyToken'] = $replyToken;
-$messages['messages'][0] = getFormatTextMessage('Hi..');
+$img_url = "https://support.jastel.co.th/cacti/graph_image.php?action=edit&local_graph_id=7452&rra_id=1";
+$messages['messages'][0] = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+$response = $bot->replyMessage($event->getReplyToken(), $outputText);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
