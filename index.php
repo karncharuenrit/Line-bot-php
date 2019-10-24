@@ -1,5 +1,6 @@
 <?php
-
+/*Return HTTP Request 200*/
+http_response_code(200);
 echo "i am bot A";
 require_once '/Users/kan/Line-bot-php/index.php';
 
