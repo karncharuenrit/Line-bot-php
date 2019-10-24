@@ -1,6 +1,6 @@
 <?php
 
-echo "i am bot eiei";
+echo "i am bot";
 require_once '/index.php';
 
 use Monolog\Logger;
