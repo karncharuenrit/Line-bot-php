@@ -56,47 +56,13 @@ function sentMessage($encodeJson,$datas)
     return $datasReturn;
 }
 
-function getContent($datas)
-{
-    $datasReturn = [];
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-      CURLOPT_URL =>   "https://api.line.me/v2/bot/message/".$datas['messageId']."/content",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_POSTFIELDS => "",
-      CURLOPT_HTTPHEADER => array(
-        "Authorization: Bearer ".$datas['token'],
-        "cache-control: no-cache"
-      ),
-    ));
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    curl_close($curl);
-    if($err){
-      $datasReturn['result'] = 'E';FF
-      $datasReturn['message'] = $err;
-    }else{
-      $datasReturn['result'] = 'S';
-      $datasReturn['message'] = 'Success';
-      $datasReturn['response'] = $response;
-    }
-    return $datasReturn;
-}
-define('UPLOAD_DIR', 'tmp_image/');
-
 $messages = [];
 $messages['replyToken'] = $replyToken;
-$messages['messages'][0] = getFormatTextMessage('Hi, how are you ?');
+$messages['messages'][0] = getFormatTextMessage("เอ้ย ถามอะไรก็ตอบได้");
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
 $results = sentMessage($encodeJson,$LINEDatas);
-//$messageType = $deCode['events'][0]['message']['type'];
 
-  
+
 ?>
