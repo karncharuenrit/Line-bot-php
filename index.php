@@ -28,7 +28,9 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
 function getFormatTextMessage($text)
-{
+{    
+    $snapshot = $reference->getSnapshot();
+    $value = $snapshot->getValue($text);
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
