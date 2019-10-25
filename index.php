@@ -3,10 +3,11 @@
 require_once './vendor/autoload.php';
 /*Return HTTP Request 200*/
 //ทำการ Return Response Status 200 กลับไปให้ LINE ก่อน เพื่อตรวจสอบว่า LINE Webhook สามารถเชื่อมมายัง Server เราได้
+
 use Kreait\Firebase\Factory;
 
 $factory = (new Factory)
-    ->withServiceAccount('/secret/readsid-5a802-d428a33cbfdc.json')
+    ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
     // The following line is optional if the project id in your credentials file
     // is identical to the subdomain of your Firebase project. If you need it,
     // make sure to replace the URL with the URL of your project.
