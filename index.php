@@ -15,7 +15,7 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 
-die(print_r($database));
+// die(print_r($database));
 
 http_response_code(200);
 
@@ -29,12 +29,20 @@ $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมู�
 
 function getFormatTextMessage($text)
 {    
-    $snapshot = $reference->getSnapshot();
-    $value = $snapshot->getValue($text);
+   
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
     return $datas;
+}
+
+function sanpShotTextMessage($text)
+{
+    $database = [];
+    $reference = $database->getReference('');
+    $snapshot = $reference->getSnapshot();
+    $value = $snapshot->getValue();
+
 }
 
 
@@ -76,6 +84,7 @@ function sentMessage($encodeJson, $datas)
     }
     return $datasReturn;
 }
+
 
 
 $messages = [];
