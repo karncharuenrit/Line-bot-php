@@ -1,6 +1,6 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
-require '/Users/kan/Line-bot-php/firebase.php';
+// require __DIR__.'/vendor/autoload.php';
+// require '/Users/kan/Line-bot-php/firebase.php';
 
 
 /*Return HTTP Request 200*/
