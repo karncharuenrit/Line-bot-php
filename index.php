@@ -1,6 +1,5 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
-require '/Users/kan/Line-bot-php/firebase.php';
 use Kreait\Firebase\Factory;
 $factory = (new Factory)
     ->withServiceAccount('/path/to/google-service-account.json')
