@@ -5,6 +5,17 @@ require_once './vendor/autoload.php';
 //ทำการ Return Response Status 200 กลับไปให้ LINE ก่อน เพื่อตรวจสอบว่า LINE Webhook สามารถเชื่อมมายัง Server เราได้
 use Kreait\Firebase\Factory;
 
+$factory = (new Factory)
+    ->withServiceAccount('/secret/readsid-5a802-d428a33cbfdc.json')
+    // The following line is optional if the project id in your credentials file
+    // is identical to the subdomain of your Firebase project. If you need it,
+    // make sure to replace the URL with the URL of your project.
+    ->withDatabaseUri('https://readsid-5a802.firebaseio.com/');
+
+$database = $factory->createDatabase();
+
+die(print_r($database));
+
 http_response_code(200);
 
 file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
