@@ -1,8 +1,10 @@
 <?php
 
-
+require_once './vendor/autoload.php';
 /*Return HTTP Request 200*/
 //ทำการ Return Response Status 200 กลับไปให้ LINE ก่อน เพื่อตรวจสอบว่า LINE Webhook สามารถเชื่อมมายัง Server เราได้
+use Kreait\Firebase\Factory;
+
 http_response_code(200);
 
 file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
