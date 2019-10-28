@@ -115,12 +115,12 @@ function sentMessage($encodeJson, $datas)
     return $datasReturn;
 }
 
-
-$messages = [];
+$reply_message = '';
 $messages['replyToken'] = $replyToken;
-$messages['messages']['text'] = $text;
+$text = $messages['messages']['text'];
 //$text = $messages['messages']['text'];
 //$messages['messages'][0] = getFormatTextMessage($text);
+$reply_message = '.$text.';
 getFormatTextMessage($text);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
