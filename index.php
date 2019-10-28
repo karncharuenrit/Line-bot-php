@@ -15,7 +15,7 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 
-//die(print_r($database));
+// die(print_r($database));
 
 http_response_code(200);
 
@@ -33,6 +33,7 @@ function getFormatTextMessage($text)
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
+    // $datas->$getReference->$pushData($text);
     return $datas;
 }
 
