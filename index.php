@@ -1,3 +1,12 @@
+<html>
+
+<head>
+    <script ></script>
+
+</head>
+
+
+</html>
 <?php
 
 require_once './vendor/autoload.php';
@@ -15,7 +24,7 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 
-// die(print_r($database));
+//die(print_r($database));
 
 http_response_code(200);
 
@@ -27,24 +36,45 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
+
 function getFormatTextMessage($text)
-{    
-   
+{
+
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
+    $text = $datas['push'];
     return $datas;
 }
 
-function sanpShotTextMessage($text)
-{
-    $database = [];
-    $reference = $database->getReference('');
-    $snapshot = $reference->getSnapshot();
-    $value = $snapshot->getValue();
-
+//pushdata
+function pushData($datas){
+    include('./index.php');
+    if(isset($_POST['push'])){
+      $messages = $_POST['messages'];
+ 
+     $data = [
+        'messages' => $messages
+     ];
+     $ref = $data;
+     $pushData = $database->$getReference($ref)->push($datas);
+ 
+    }
 }
 
+function send_reply_message($url, $post_header, $post_body)
+{
+ $ch = curl_init($url);
+ curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+ curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+ $result = curl_exec($ch);
+ curl_close($ch);
+
+ return $result;
+}
 
 function sentMessage($encodeJson, $datas)
 {
@@ -86,10 +116,11 @@ function sentMessage($encodeJson, $datas)
 }
 
 
-
 $messages = [];
 $messages['replyToken'] = $replyToken;
-$messages['messages'][0] = getFormatTextMessage('Hi..');
+$messages['messages']['text'];
+$text = $messages['messages']['text'];
+$messages['messages'][0] = getFormatTextMessage($text);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
