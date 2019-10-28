@@ -37,13 +37,13 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
 
-function getFormatTextMessage($text)
+function getFormatTextMessage($text1)
 {
 
     $datas = [];
     $datas['type'] = 'text';
-    $datas['text'] = $text;
-    $text = $datas['push'];
+    $datas['text'] = $text1;
+    $text1 = $datas;
     return $datas;
 }
 
@@ -118,9 +118,10 @@ function sentMessage($encodeJson, $datas)
 
 $messages = [];
 $messages['replyToken'] = $replyToken;
-$messages['messages']['text'];
-$text = $messages['messages']['text'];
-$messages['messages'][0] = getFormatTextMessage($text);
+$messages['messages']['text'] = $text;
+//$text = $messages['messages']['text'];
+//$messages['messages'][0] = getFormatTextMessage($text);
+getFormatTextMessage($text);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
