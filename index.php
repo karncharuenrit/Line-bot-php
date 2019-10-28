@@ -121,7 +121,7 @@ $text = $messages['messages']['text'];
 //$text = $messages['messages']['text'];
 //$messages['messages'][0] = getFormatTextMessage($text);
 $reply_message = '.$text';
-getFormatTextMessage($text);
+getFormatTextMessage('Hi.');
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
