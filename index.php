@@ -1,12 +1,3 @@
-<html>
-
-<head>
-    <script ></script>
-
-</head>
-
-
-</html>
 <?php
 
 require_once './vendor/autoload.php';
@@ -36,45 +27,16 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
-
-function getFormatTextMessage($text1)
-{
-
+function getFormatTextMessage($text)
+{    
+   
     $datas = [];
     $datas['type'] = 'text';
-    $datas['text'] = $text1;
-    $text1 = $datas;
+    $datas['text'] = $text;
+    $datas->$getReference->$pushData($text);
     return $datas;
 }
 
-//pushdata
-function pushData($datas){
-    include('./index.php');
-    if(isset($_POST['push'])){
-      $messages = $_POST['messages'];
- 
-     $data = [
-        'messages' => $messages
-     ];
-     $ref = $data;
-     $pushData = $database->$getReference($ref)->push($datas);
- 
-    }
-}
-
-function send_reply_message($url, $post_header, $post_body)
-{
- $ch = curl_init($url);
- curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
- curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
- curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
- curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
- $result = curl_exec($ch);
- curl_close($ch);
-
- return $result;
-}
 
 function sentMessage($encodeJson, $datas)
 {
@@ -115,13 +77,10 @@ function sentMessage($encodeJson, $datas)
     return $datasReturn;
 }
 
-$reply_message = '';
+
+$messages = [];
 $messages['replyToken'] = $replyToken;
-$text = $messages['messages']['text'];
-//$text = $messages['messages']['text'];
-//$messages['messages'][0] = getFormatTextMessage($text);
-$reply_message = '.$text';
-getFormatTextMessage('Hi.');
+$messages['messages'][0] = getFormatTextMessage('Hi..');
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
