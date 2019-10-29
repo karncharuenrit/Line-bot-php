@@ -27,16 +27,16 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
-$accessToken = "";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
-   $content = file_get_contents('php://input');
-   $arrayJson = json_decode($content, true);
-   $arrayHeader = array();
-   $arrayHeader[] = "Content-Type: application/json";
-   $arrayHeader[] = "Authorization: Bearer {$accessToken}";
+$accessToken = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU="; //copy ข้อความ Channel access token ตอนที่ตั้งค่า
+$content = file_get_contents('php://input');
+$arrayJson = json_decode($content, true);
+$arrayHeader = array();
+$arrayHeader[] = "Content-Type: application/json";
+$arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
 function getFormatTextMessage($text)
-{    
-   
+{
+
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
@@ -44,20 +44,21 @@ function getFormatTextMessage($text)
     return $datas;
 }
 
-function pushMsg($arrayHeader,$arrayPostData){
+function pushMsg($arrayHeader, $arrayPostData)
+{
     $strUrl = "https://api.line.me/v2/bot/message/push";
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$strUrl);
+    curl_setopt($ch, CURLOPT_URL, $strUrl);
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $result = curl_exec($ch);
-    curl_close ($ch);
- }
- exit;
+    curl_close($ch);
+}
+exit;
 
 
 function sentMessage($encodeJson, $datas)
@@ -97,17 +98,15 @@ function sentMessage($encodeJson, $datas)
         }
     }
     return $datasReturn;
-
-    
 }
 //pushmessage
-if($message == "A"){
-    
-       $arrayPostData['to'] = $id;
-       $arrayPostData['messages'][0]['type'] = "text";
-       $arrayPostData['messages'][0]['text'] = "OK";
-       pushMsg($arrayHeader,$arrayPostData);
- }
+if ($message == "A") {
+
+    $arrayPostData['to'] = $id;
+    $arrayPostData['messages'][0]['type'] = "text";
+    $arrayPostData['messages'][0]['text'] = "OK";
+    pushMsg($arrayHeader, $arrayPostData);
+}
 
 $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 $id = $arrayJson['events'][0]['source']['userId'];
@@ -119,6 +118,4 @@ $messages['messages'][0] = getFormatTextMessage('Hi..ห้ามหลับบ
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
-$results = sentMessage($encodeJson, $LINEDatas);
-
-;
+$results = sentMessage($encodeJson, $LINEDatas);;
