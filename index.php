@@ -108,8 +108,8 @@ if ($message == "A") {
     pushMsg($arrayHeader, $arrayPostData);
 }
 
-$message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
-$id = $arrayJson['events'][0]['source']['userId'];
+$message = $arrayJson['replyToken'][0]['message']['text']; //รับข้อความจากผู้ใช้
+$id = $arrayJson['replyToken'][0]['source']['userId'];
 $reply_messages = '';
 $messages = [];
 $messages['replyToken'] = $replyToken;
