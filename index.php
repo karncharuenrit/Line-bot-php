@@ -75,13 +75,41 @@ function sentMessage($encodeJson, $datas)
         }
     }
     return $datasReturn;
+
+    
 }
 
-
+$reply_messages = '';
 $messages = [];
 $messages['replyToken'] = $replyToken;
+$text = $messaage['mmessage']['type']['text'];
 $messages['messages'][0] = getFormatTextMessage('Hi..');
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
 $results = sentMessage($encodeJson, $LINEDatas);
+
+define(‘LINE_API’''://notify-api.line.me/api/notify / kanr/nja);
+ 
+$token = “”; //ใส่Token ที่copy เอาไว้
+$str = “Hello”; //ข้อความที่ต้องการส่ง สูงสุด 1000 ตัวอักษร
+ 
+$res = notify_message($str,$token);
+print_r($res);
+function notify_message($message,$token){
+ $queryData = array(‘message’ => $message);
+ $queryData = http_build_query($queryData,’’,’&’);
+ $headerOptions = array( 
+         ‘http’=>array(
+            ‘method’=>’POST’,
+            ‘header’=> “Content-Type: application/x-www-form-urlencoded\r\n”
+                      .”Authorization: Bearer “.$token.”\r\n”
+                      .”Content-Length: “.strlen($queryData).”\r\n”,
+            ‘content’ => $queryData
+         ),
+ );
+ $context = stream_context_create($headerOptions);
+ $result = file_get_contents(LINE_API,FALSE,$context);
+ $res = json_decode($result);
+ return $res;
+
