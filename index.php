@@ -27,6 +27,13 @@ $deCode = json_decode($datas, true); //$decode : เก็บค่า Array ห
 
 $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
 
+$accessToken = "";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
+   $content = file_get_contents('php://input');
+   $arrayJson = json_decode($content, true);
+   $arrayHeader = array();
+   $arrayHeader[] = "Content-Type: application/json";
+   $arrayHeader[] = "Authorization: Bearer {$accessToken}";
+
 function getFormatTextMessage($text)
 {    
    
@@ -36,6 +43,21 @@ function getFormatTextMessage($text)
     // $datas->$getReference->$pushData($text);
     return $datas;
 }
+
+function pushMsg($arrayHeader,$arrayPostData){
+    $strUrl = "https://api.line.me/v2/bot/message/push";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$strUrl);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $result = curl_exec($ch);
+    curl_close ($ch);
+ }
+ exit;
 
 
 function sentMessage($encodeJson, $datas)
@@ -78,11 +100,21 @@ function sentMessage($encodeJson, $datas)
 
     
 }
+//pushmessage
+if($message == "A"){
+    
+       $arrayPostData['to'] = $id;
+       $arrayPostData['messages'][0]['type'] = "text";
+       $arrayPostData['messages'][0]['text'] = "OK";
+       pushMsg($arrayHeader,$arrayPostData);
+ }
 
+$message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
+$id = $arrayJson['events'][0]['source']['userId'];
 $reply_messages = '';
 $messages = [];
 $messages['replyToken'] = $replyToken;
-$text = $messaage['mmessage']['type']['text'];
+//$text = $messaage['mmessage']['type']['text'];
 $messages['messages'][0] = getFormatTextMessage('Hi..ห้ามหลับบบ');
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
