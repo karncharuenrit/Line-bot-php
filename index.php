@@ -61,64 +61,56 @@ function pushMsg($arrayHeader, $arrayPostData)
 exit;
 
 
-// function sentMessage($encodeJson, $datas)
-// {
-//     $datasReturn = [];
-//     $curl = curl_init();
-//     curl_setopt_array($curl, array(
-//         CURLOPT_URL => $datas['url'],
-//         CURLOPT_RETURNTRANSFER => true,
-//         CURLOPT_ENCODING => "",
-//         CURLOPT_MAXREDIRS => 10,
-//         CURLOPT_TIMEOUT => 30,
-//         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//         CURLOPT_CUSTOMREQUEST => "POST",
-//         CURLOPT_POSTFIELDS => $encodeJson,
-//         CURLOPT_HTTPHEADER => array(
-//             "authorization: Bearer " . $datas['token'],
-//             "cache-control: no-cache",
-//             "content-type: application/json; charset=UTF-8",
+function sentMessage($encodeJson, $datas)
+{
+    $datasReturn = [];
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $datas['url'],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => $encodeJson,
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer " . $datas['token'],
+            "cache-control: no-cache",
+            "content-type: application/json; charset=UTF-8",
 
-//         ),
+        ),
 
-//     ));
-//     $response = curl_exec($curl);
-//     $err = curl_error($curl);
-//     curl_close($curl);
-//     if ($err) {
-//         $datasReturn['result'] = 'E';
-//         $datasReturn['message'] = $err;
-//     } else {
-//         if ($response == "{}") {
-//             $datasReturn['result'] = 'S';
-//             $datasReturn['message'] = 'Success';
-//         } else {
-//             $datasReturn['result'] = 'E';
-//             $datasReturn['message'] = $response;
-//         }
-//     }
-//     return $datasReturn;
-// }
-//pushmessage
-if ($message == "A") {
-
-    $arrayPostData['to'] = $id;
-    $arrayPostData['messages'][0]['type'] = "text";
-    $arrayPostData['messages'][0]['text'] = "OK";
-    pushMsg($arrayHeader, $arrayPostData);
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if ($err) {
+        $datasReturn['result'] = 'E';
+        $datasReturn['message'] = $err;
+    } else {
+        if ($response == "{}") {
+            $datasReturn['result'] = 'S';
+            $datasReturn['message'] = 'Success';
+        } else {
+            $datasReturn['result'] = 'E';
+            $datasReturn['message'] = $response;
+        }
+    }
+    return $datasReturn;
 }
 
 $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 $id = $arrayJson['events'][0]['source']['userId']; //recive id form user 
-// $reply_messages = '';
-// $messages = [];
-// $messages['replyToken'] = $replyToken;
-// //$text = $messaage['mmessage']['type']['text'];
-// $messages['messages'][0] = getFormatTextMessage('Hi..ห้ามหลับบบ');
-// $encodeJson = json_encode($messages);
-// $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
-// $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
-// $results = sentMessage($encodeJson, $LINEDatas);;
+$reply_messages = '';
+$messages = [];
+$messages['replyToken'] = $replyToken;
+//$text = $messaage['mmessage']['type']['text'];
+$messages['messages'][0] = getFormatTextMessage('Hi..ห้ามหลับบบ');
+$encodeJson = json_encode($messages);
+$LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
+$LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
+$results = sentMessage($encodeJson, $LINEDatas);;
 
 
 //test2
