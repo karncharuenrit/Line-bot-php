@@ -40,7 +40,7 @@ function getFormatTextMessage($text)
     $datas = [];
     $datas['type'] = 'text';
     $datas['text'] = $text;
-    // $datas->$getReference->$pushData($text);
+    echo $text;
     return $datas;
 }
 
