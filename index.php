@@ -116,19 +116,22 @@ if (sizeof($request_array['events']) > 0) {
     foreach ($request_array['events'] as $event) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
-  
+
 
 
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                
+                $datas = [];
+                $datas['type'] = 'text';
+                $datas['text'] = $text;
+                echo $text;
             } else
                 $reply_message = '' . $event['message']['type'] . '';
         } else
             $reply_message = '' . $event['type'] . '';
- 
+            
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
@@ -141,11 +144,10 @@ if (sizeof($request_array['events']) > 0) {
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
             echo "Result: " . $send_result . "\r\n";
         }
-      
     }
 }
 
-echo  "12345";
+
 
 
 function send_reply_message($url, $post_header, $post_body)
