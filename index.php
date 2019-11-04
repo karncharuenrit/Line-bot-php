@@ -116,22 +116,24 @@ if (sizeof($request_array['events']) > 0) {
     foreach ($request_array['events'] as $event) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
-
-
-
+        $datas = [];
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                $datas = [];
                 $datas['type'] = 'text';
-                $datas['text'] = $text;
-                echo $text;
+                $datas['text'] = $reply_message;
+                echo $reply_message;
             } else
                 $reply_message = '' . $event['message']['type'] . '';
+                $datas['type'] = 'text';
+                $datas['text'] = $reply_message;
+                echo $reply_message;
         } else
             $reply_message = '' . $event['type'] . '';
-            
+            $datas['type'] = 'text';
+            $datas['text'] = $reply_message;
+            echo $reply_message;
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
