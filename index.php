@@ -125,16 +125,16 @@ if ( sizeof($request_array['events']) > 0 )
    {
     $text = $event['message']['text'];
     $reply_message = ''.$text.'';
-    echo $text;
+    getFormatTextMessage($text);
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-    echo $event['message']['type'];
+    getFormatTextMessage($event['message']['type']);
   
   }
   else
    $reply_message = ''.$event['type'].'';
-   echo $event['type'];
+   getFormatTextMessage($event['type']);
  
   if( strlen($reply_message) > 0 )
   {
