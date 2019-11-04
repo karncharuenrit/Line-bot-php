@@ -124,14 +124,14 @@ if ( sizeof($request_array['events']) > 0 )
    if( $event['message']['type'] == 'text' )
    {
     $text = $event['message']['text'];
-    $reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
+    $reply_message = ''.$text.'';
    }
    else
-    $reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
+    $reply_message = ''.$event['message']['type'].'';
   
   }
   else
-   $reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
+   $reply_message = ''.$event['type'].'';
  
   if( strlen($reply_message) > 0 )
   {
@@ -163,7 +163,8 @@ function send_reply_message($url, $post_header, $post_body)
 
  return $result;
 }
-
+$message = $arrayJson['events'][0]['message']['text'];
+$messages['messages'][0] = getFormatTextMessage($reply_message);
 ?>
 
 // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
