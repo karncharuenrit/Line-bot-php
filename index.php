@@ -119,23 +119,22 @@ if ( sizeof($request_array['events']) > 0 )
   $reply_message = '';
   $reply_token = $event['replyToken'];
 
-{
-
   if ( $event['type'] == 'message' ) 
   {
    if( $event['message']['type'] == 'text' )
    {
     $text = $event['message']['text'];
     $reply_message = ''.$text.'';
-  
+    echo '1';
+
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-   
+    echo '2';
   }
   else
    $reply_message = ''.$event['type'].'';
-   
+   echo '3';
 
   if( strlen($reply_message) > 0 )
   {
