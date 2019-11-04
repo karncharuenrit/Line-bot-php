@@ -129,12 +129,12 @@ if ( sizeof($request_array['events']) > 0 )
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-    echo $text;
+    echo $event['message']['type'];
   
   }
   else
    $reply_message = ''.$event['type'].'';
-   echo $text;
+   echo $event['type'];
  
   if( strlen($reply_message) > 0 )
   {
