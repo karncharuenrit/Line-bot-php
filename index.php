@@ -125,15 +125,15 @@ if ( sizeof($request_array['events']) > 0 )
    {
     $text = $event['message']['text'];
     $reply_message = ''.$text.'';
-    echo $reply_message;
+
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-    echo $reply_message;
+    
   }
   else
    $reply_message = ''.$event['type'].'';
-   echo $reply_message;
+ 
 
   if( strlen($reply_message) > 0 )
   {
@@ -150,7 +150,7 @@ if ( sizeof($request_array['events']) > 0 )
   }
  }
 }
-
+getFormatTextMessage($reply_message);
 
 
 function send_reply_message($url, $post_header, $post_body)
