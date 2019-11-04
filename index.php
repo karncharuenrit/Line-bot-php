@@ -108,10 +108,14 @@ function sentMessage($encodeJson, $datas)
 $reply_messages = '';
 $messages = [];
 $messages['replyToken'] = $replyToken;
+$userID = $events['events'][0]['source']['userId'];
+$sourceType = $events['events'][0]['source']['type'];
 //$text = $messaage['mmessage']['type']['text'];
-$text1 = '';
-$text1 = $event['message']['text'];
-$reply_message = '('.ucfirst($event['message']['type']).')';
+$request = file_get_contents('php://input');   // Get request content
+$request_array = json_decode($request, true);   // Decode JSON to Array
+$request_array['events'] = $event;
+$text = $event['message']['text'];
+$reply_message = '('.$text.')';
 $messages['messages'][0] = getFormatTextMessage($reply_message);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
