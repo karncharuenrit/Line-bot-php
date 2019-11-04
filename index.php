@@ -125,15 +125,18 @@ if ( sizeof($request_array['events']) > 0 )
    {
     $text = $event['message']['text'];
     $reply_message = ''.$text.'';
+    return $text;
     
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-   
+    $event['message']['type'] = $text;
+    return $text;
   
   }
   else
    $reply_message = ''.$event['type'].'';
+   $event['type'] = $text;
  
  
   if( strlen($reply_message) > 0 )
@@ -147,11 +150,12 @@ if ( sizeof($request_array['events']) > 0 )
 
    $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
    echo "Result: ".$send_result."\r\n";
-   echo 'finished';
+   
   }
  }
 }
 
+getFormatTextMessage($text);
 
 function send_reply_message($url, $post_header, $post_body)
 {
