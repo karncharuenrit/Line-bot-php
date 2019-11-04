@@ -123,17 +123,17 @@ if (sizeof($request_array['events']) > 0) {
                 $reply_message = '' . $text . '';
                 $datas['type'] = 'text';
                 $datas['text'] = $reply_message;
-                return $datas;
+                echo $datas;
             } else
                 $reply_message = '' . $event['message']['type'] . '';
                 $datas['type'] = 'text';
                 $datas['text'] = $reply_message;
-                return $datas;
+                echo $datas;
         } else
             $reply_message = '' . $event['type'] . '';
             $datas['type'] = 'text';
             $datas['text'] = $reply_message;
-            return $datas;
+            echo $datas;
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
