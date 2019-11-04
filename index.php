@@ -148,7 +148,7 @@ if ( sizeof($request_array['events']) > 0 )
  }
 }
 
-echo "OK";
+echo $text;
 
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -163,8 +163,7 @@ function send_reply_message($url, $post_header, $post_body)
 
  return $result;
 }
-$message = $arrayJson['events'][0]['message']['text'];
-$messages['messages'][0] = getFormatTextMessage($reply_message);
+
 ?>
 
 // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
