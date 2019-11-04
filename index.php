@@ -122,7 +122,6 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
-                echo 'ok';
                 $reply_message = '' . $text . '';
                 
             } else
@@ -146,7 +145,7 @@ if (sizeof($request_array['events']) > 0) {
     }
 }
 
-
+echo 'ok';
 
 
 function send_reply_message($url, $post_header, $post_body)
