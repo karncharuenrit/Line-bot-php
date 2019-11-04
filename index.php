@@ -118,6 +118,8 @@ if ( sizeof($request_array['events']) > 0 )
  {
   $reply_message = '';
   $reply_token = $event['replyToken'];
+  getFormatTextMessage($reply_message);
+{
 
   if ( $event['type'] == 'message' ) 
   {
@@ -125,15 +127,15 @@ if ( sizeof($request_array['events']) > 0 )
    {
     $text = $event['message']['text'];
     $reply_message = ''.$text.'';
-
+    getFormatTextMessage($reply_message);
    }
    else
     $reply_message = ''.$event['message']['type'].'';
-    
+    getFormatTextMessage($reply_message);
   }
   else
    $reply_message = ''.$event['type'].'';
-   
+   getFormatTextMessage($reply_message);
 
   if( strlen($reply_message) > 0 )
   {
@@ -150,7 +152,7 @@ if ( sizeof($request_array['events']) > 0 )
   }
   
  }
- echo $reply_message;
+ 
 }
 
 
