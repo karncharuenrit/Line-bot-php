@@ -83,7 +83,7 @@ function sentMessage($encodeJson, $datas)
             "content-type: application/json; charset=UTF-8",
 
         ),
-        
+
 
     ));
     $response = curl_exec($curl);
@@ -111,49 +111,38 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 
-if ( sizeof($request_array['events']) > 0 )
-{
+if (sizeof($request_array['events']) > 0) {
 
- foreach ($request_array['events'] as $event)
- {
-  $reply_message = '';
-  $reply_token = $event['replyToken'];
+    foreach ($request_array['events'] as $event) {
+        $reply_message = '';
+        $reply_token = $event['replyToken'];
+        $messages = [];
+        $messages['replyToken'] = $replyToken;
+        $messages['messages'][0] = getFormatTextMessage($reply_message);
 
-  if ( $event['type'] == 'message' ) 
-  {
-   if( $event['message']['type'] == 'text' )
-   {
-    $text = $event['message']['text'];
-    $reply_message = ''.$text.'';
-    echo '1';
+        if ($event['type'] == 'message') {
+            if ($event['message']['type'] == 'text') {
+                $text = $event['message']['text'];
+                $reply_message = '' . $text . '';
+            } else
+                $reply_message = '' . $event['message']['type'] . '';
+        } else
+            $reply_message = '' . $event['type'] . '';
 
-   }
-   else
-    $reply_message = ''.$event['message']['type'].'';
-    echo '2';
-  }
-  else
-   $reply_message = ''.$event['type'].'';
-   echo '3';
 
-  if( strlen($reply_message) > 0 )
-  {
-   //$reply_message = iconv("tis-620","utf-8",$reply_message);
-   $data = [
-    'replyToken' => $reply_token,
-    'messages' => [['type' => 'text', 'text' => $reply_message]]
-   ];
-   $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+        if (strlen($reply_message) > 0) {
+            //$reply_message = iconv("tis-620","utf-8",$reply_message);
+            $data = [
+                'replyToken' => $reply_token,
+                'messages' => [['type' => 'text', 'text' => $reply_message]]
+            ];
+            $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
-   $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
-   echo "Result: ".$send_result."\r\n";
-
-   echo '4';
-   
-  }
-  
- }
- 
+            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
+            echo "Result: " . $send_result . "\r\n";
+        }
+      
+    }
 }
 
 
@@ -161,16 +150,16 @@ if ( sizeof($request_array['events']) > 0 )
 
 function send_reply_message($url, $post_header, $post_body)
 {
- $ch = curl_init($url);
- curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
- curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
- curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
- curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
- $result = curl_exec($ch);
- curl_close($ch);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
 
- return $result;
+    return $result;
 }
 
 ?>
