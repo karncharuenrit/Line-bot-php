@@ -116,15 +116,15 @@ if (sizeof($request_array['events']) > 0) {
     foreach ($request_array['events'] as $event) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
-        $messages = [];
-        $messages['replyToken'] = $replyToken;
+  
 
 
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
+                echo $text;
                 $reply_message = '' . $text . '';
-                $messages['messages'][0] = getFormatTextMessage($text);
+                
             } else
                 $reply_message = '' . $event['message']['type'] . '';
         } else
