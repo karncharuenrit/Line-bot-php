@@ -122,7 +122,7 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
-                echo $text;
+                echo 'ok';
                 $reply_message = '' . $text . '';
                 
             } else
