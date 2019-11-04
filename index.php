@@ -150,8 +150,9 @@ if ( sizeof($request_array['events']) > 0 )
   }
  }
 }
-getFormatTextMessage($reply_message);
+
 echo 'ok';
+echo ''.$text.'';
 
 function send_reply_message($url, $post_header, $post_body)
 {
