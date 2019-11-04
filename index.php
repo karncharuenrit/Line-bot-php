@@ -148,7 +148,7 @@ if ( sizeof($request_array['events']) > 0 )
  }
 }
 
-echo $text;
+echo ''.$text.'';
 
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -166,7 +166,7 @@ function send_reply_message($url, $post_header, $post_body)
 
 ?>
 
-// $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
+<!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 // $id = $arrayJson['events'][0]['source']['userId']; //recive id form user 
 $reply_messages = '';
 $messages = [];
@@ -180,7 +180,7 @@ $messages['messages'][0] = getFormatTextMessage($reply_message);
 $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
-$results = sentMessage($encodeJson, $LINEDatas);;
+$results = sentMessage($encodeJson, $LINEDatas);; -->
 
 
-//test2
+<!-- //test2 -->
