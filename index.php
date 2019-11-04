@@ -120,15 +120,14 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
-                echo '' . $text . '';
                 $reply_message = '' . $text . '';
             } else
-                echo '' . $event['message']['type'] . '';
-            $reply_message = '' . $event['message']['type'] . '';
+                $reply_message = '' . $event['message']['type'] . '';
         } else
-            echo '' . $event['type'] . '';
-        $reply_message = '' . $event['type'] . '';
-
+            $reply_message = '' . $event['type'] . '';
+        $datas['type'] = 'text';
+        $datas['text'] = $reply_message;
+        echo $datas;
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
