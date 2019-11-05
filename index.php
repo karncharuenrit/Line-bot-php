@@ -124,7 +124,7 @@ if (sizeof($request_array['events']) > 0) {
             $reply_message = '' . $text . '';
             $reply_messages = '';
             $messages = [];
-            $messages['messages'][0] = getFormatTextMessage('' . $text . '');
+            $messages['messages'][0] = getFormatTextMessage( $text);
             $encodeJson = json_encode($messages);
             $messages['replyToken'] = $replyToken;
             $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
