@@ -27,8 +27,9 @@ $database = $factory->createDatabase();
 http_response_code(200);
 
 file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
-$httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
-$bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
+$httpClient = new CurlHTTPClient($accessToken);
+$bot = new LINEBot($httpClient, array('channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
+'));
 $datas = file_get_contents('php://input'); //$datas : เราสร้างตัวแปรนี้ขึ้นมาเพื่อไว้สำหรับเก็บ Datas ที่เราได้รับมาจาก LINE
 $deCode = json_decode($datas, true); //$decode : เก็บค่า Array หลังจาก Decode แล้วโดยใช้คำสั่ง json_decode
 
