@@ -120,10 +120,13 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
+                echo '' . $text . '';
                 $reply_message = '' . $text . '';
             } else
+            echo '' . $text . '';
             $reply_message = '' . $event['message']['type'] . '';
         } else
+        echo '' . $text . '';
         $reply_message = '' . $event['type'] . '';
 
 
