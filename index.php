@@ -141,10 +141,11 @@ if (sizeof($request_array['events']) > 0) {
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
             echo "Result: " . $send_result . "\r\n";
         }
+    return $reply_message;
     }
 }
 
-echo $datas;
+echo $reply_message;
 
 
 function send_reply_message($url, $post_header, $post_body)
