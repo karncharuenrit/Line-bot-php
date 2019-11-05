@@ -1,185 +1,178 @@
-<?php
+<!-- <
 
-// require_once './vendor/autoload.php';
-// /*Return HTTP Request 200*/
-// //ทำการ Return Response Status 200 กลับไปให้ LINE ก่อน เพื่อตรวจสอบว่า LINE Webhook สามารถเชื่อมมายัง Server เราได้
+require_once './vendor/autoload.php';
+/*Return HTTP Request 200*/
+//ทำการ Return Response Status 200 กลับไปให้ LINE ก่อน เพื่อตรวจสอบว่า LINE Webhook สามารถเชื่อมมายัง Server เราได้
 
-// use Kreait\Firebase\Factory;
-// use LINE\LINEBot;
-// use LINE\LINEBot\HTTPClient;
-// use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-// use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
-
-
-// $factory = (new Factory)
-//     ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
-//     // The following line is optional if the project id in your credentials file
-//     // is identical to the subdomain of your Firebase project. If you need it,
-//     // make sure to replace the URL with the URL of your project.
-//     ->withDatabaseUri('https://readsid-5a802.firebaseio.com/');
-
-// $database = $factory->createDatabase();
-
-// // die(print_r($database));
+use Kreait\Firebase\Factory;
+use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
 
+$factory = (new Factory)
+    ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
+    // The following line is optional if the project id in your credentials file
+    // is identical to the subdomain of your Firebase project. If you need it,
+    // make sure to replace the URL with the URL of your project.
+    ->withDatabaseUri('https://readsid-5a802.firebaseio.com/');
 
-// http_response_code(200);
+$database = $factory->createDatabase();
 
-// file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
-
-
-// $datas = file_get_contents('php://input'); //$datas : เราสร้างตัวแปรนี้ขึ้นมาเพื่อไว้สำหรับเก็บ Datas ที่เราได้รับมาจาก LINE
-// $deCode = json_decode($datas, true); //$decode : เก็บค่า Array หลังจาก Decode แล้วโดยใช้คำสั่ง json_decode
-
-// $replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
-
-// $accessToken = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU="; //copy ข้อความ Channel access token ตอนที่ตั้งค่า
-// $content = file_get_contents('php://input');
-// $arrayJson = json_decode($content, true);
-// $arrayHeader = array();
-// $arrayHeader[] = "Content-Type: application/json";
-// $arrayHeader[] = "Authorization: Bearer {$accessToken}";
+// die(print_r($database));
 
 
-// function getFormatTextMessage($text)
+
+http_response_code(200);
+
+file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
+
+
+$datas = file_get_contents('php://input'); //$datas : เราสร้างตัวแปรนี้ขึ้นมาเพื่อไว้สำหรับเก็บ Datas ที่เราได้รับมาจาก LINE
+$deCode = json_decode($datas, true); //$decode : เก็บค่า Array หลังจาก Decode แล้วโดยใช้คำสั่ง json_decode
+
+$replyToken = $deCode['events'][0]['replyToken']; //เก็บข้อมูล replytoken ซึ่ง replytoken นี้เอาไว้สำหรับใช้ในการตอบข้อความแบบ reply (ตอบกลับทันทีหลังจากที่มีการส่ง Datas จาก LINE เข้ามา)
+
+$accessToken = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU="; //copy ข้อความ Channel access token ตอนที่ตั้งค่า
+$content = file_get_contents('php://input');
+$arrayJson = json_decode($content, true);
+$arrayHeader = array();
+$arrayHeader[] = "Content-Type: application/json";
+$arrayHeader[] = "Authorization: Bearer {$accessToken}";
+
+
+function getFormatTextMessage($text)
+{
+
+    $datas = [];
+    $datas['type'] = 'text';
+    $datas['text'] = $text;
+    echo $text;
+    return $datas;
+}
+
+// function pushMsg($arrayHeader, $arrayPostData)
 // {
-
-//     $datas = [];
-//     $datas['type'] = 'text';
-//     $datas['text'] = $text;
-//     echo $text;
-//     return $datas;
-// }
-
-// // function pushMsg($arrayHeader, $arrayPostData)
-// // {
-// //     $strUrl = "https://api.line.me/v2/bot/message/push";
-// //     $ch = curl_init();
-// //     curl_setopt($ch, CURLOPT_URL, $strUrl);
-// //     curl_setopt($ch, CURLOPT_HEADER, false);
-// //     curl_setopt($ch, CURLOPT_POST, true);
-// //     curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
-// //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
-// //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-// //     $result = curl_exec($ch);
-// //     curl_close($ch);
-// // }
-// // exit;
-
-
-// function sentMessage($encodeJson, $datas)
-// {
-//     $datasReturn = [];
-//     $curl = curl_init();
-//     curl_setopt_array($curl, array(
-//         CURLOPT_URL => $datas['url'],
-//         CURLOPT_RETURNTRANSFER => true,
-//         CURLOPT_ENCODING => "",
-//         CURLOPT_MAXREDIRS => 10,
-//         CURLOPT_TIMEOUT => 30,
-//         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//         CURLOPT_CUSTOMREQUEST => "POST",
-//         CURLOPT_POSTFIELDS => $encodeJson,
-//         CURLOPT_HTTPHEADER => array(
-//             "authorization: Bearer " . $datas['token'],
-//             "cache-control: no-cache",
-//             "content-type: application/json; charset=UTF-8",
-
-//         ),
-
-
-//     ));
-//     $response = curl_exec($curl);
-//     $err = curl_error($curl);
-//     curl_close($curl);
-//     if ($err) {
-//         $datasReturn['result'] = 'E';
-//         $datasReturn['message'] = $err;
-//     } else {
-//         if ($response == "{}") {
-//             $datasReturn['result'] = 'S';
-//             $datasReturn['message'] = 'Success';
-//         } else {
-//             $datasReturn['result'] = 'E';
-//             $datasReturn['message'] = $response;
-//         }
-//     }
-//     return $datasReturn;
-// }
-// //-------------------------------------replymessages------------------------------------------------------------------------------
-
-// $API_URL = 'https://api.line.me/v2/bot/message/reply';
-// $ACCESS_TOKEN = 'hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
-// $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN);
-
-// $request = file_get_contents('php://input');   // Get request content
-// $request_array = json_decode($request, true);   // Decode JSON to Array
-
-
-
-// if (sizeof($request_array['events']) > 0) {
-
-//     foreach ($request_array['events'] as $event) {
-//         $reply_message = '';
-//         $reply_token = $event['replyToken'];
-//         $datas = [];
-
-//         if ($event['type'] == 'message') {
-//             if ($event['message']['type'] == 'text') {
-//                 $text = $event['message']['text'];
-//                 $reply_message = '' . $text . '';
-//             } else
-
-//                 $reply_message = '' . $event['message']['type'] . '';
-//         } else
-//             $reply_message = '' . $event['type'] . '';
-
-
-
-
-//         if (strlen($reply_message) > 0) {
-//             //$reply_message = iconv("tis-620","utf-8",$reply_message);
-
-//             $data = [
-//                 'replyToken' => $reply_token,
-//                 'messages' => [['type' => 'text', 'text' => $reply_message]]
-//             ];
-
-
-
-//             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-
-//             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
-//             echo "Result: " . $send_result . "\r\n";
-//         }
-//     }
-// }
-
-// function send_reply_message($url, $post_header, $post_body)
-// {
-//     $ch = curl_init($url);
-//     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+//     $strUrl = "https://api.line.me/v2/bot/message/push";
+//     $ch = curl_init();
+//     curl_setopt($ch, CURLOPT_URL, $strUrl);
+//     curl_setopt($ch, CURLOPT_HEADER, false);
+//     curl_setopt($ch, CURLOPT_POST, true);
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
 //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//     curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
-//     curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
-//     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+//     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 //     $result = curl_exec($ch);
 //     curl_close($ch);
-
-//     return $result;
 // }
+// exit;
+
+
+function sentMessage($encodeJson, $datas)
+{
+    $datasReturn = [];
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $datas['url'],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => $encodeJson,
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer " . $datas['token'],
+            "cache-control: no-cache",
+            "content-type: application/json; charset=UTF-8",
+
+        ),
+
+
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if ($err) {
+        $datasReturn['result'] = 'E';
+        $datasReturn['message'] = $err;
+    } else {
+        if ($response == "{}") {
+            $datasReturn['result'] = 'S';
+            $datasReturn['message'] = 'Success';
+        } else {
+            $datasReturn['result'] = 'E';
+            $datasReturn['message'] = $response;
+        }
+    }
+    return $datasReturn;
+}
+//-------------------------------------replymessages------------------------------------------------------------------------------
+
+$API_URL = 'https://api.line.me/v2/bot/message/reply';
+$ACCESS_TOKEN = 'hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
+$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN);
+
+$request = file_get_contents('php://input');   // Get request content
+$request_array = json_decode($request, true);   // Decode JSON to Array
+
+
+
+if (sizeof($request_array['events']) > 0) {
+
+    foreach ($request_array['events'] as $event) {
+        $reply_message = '';
+        $reply_token = $event['replyToken'];
+        $datas = [];
+
+        if ($event['type'] == 'message') {
+            if ($event['message']['type'] == 'text') {
+                $text = $event['message']['text'];
+                $reply_message = '' . $text . '';
+            } else
+
+                $reply_message = '' . $event['message']['type'] . '';
+        } else
+            $reply_message = '' . $event['type'] . '';
+
+
+
+
+        if (strlen($reply_message) > 0) {
+            //$reply_message = iconv("tis-620","utf-8",$reply_message);
+
+            $data = [
+                'replyToken' => $reply_token,
+                'messages' => [['type' => 'text', 'text' => $reply_message]]
+            ];
+
+
+
+            $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
+            echo "Result: " . $send_result . "\r\n";
+        }
+    }
+}
+
+function send_reply_message($url, $post_header, $post_body)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    return $result;
+}
 //--------------------------------------------------imagebuilder------------------------------------------------
 
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
-']);
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363');
-$response = $bot->replyMessage($httpClient , $textMessageBuilder);
-
-echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 
@@ -203,3 +196,93 @@ $results = sentMessage($encodeJson, $LINEDatas);; -->
 
 
 <!-- //test2 -->
+ -->
+ <?php
+require_once '../vendor/autoload.php';
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+$logger = new Logger('LineBot');
+$logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($_ENV["hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU="]);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $_ENV["0b524fb063d9b92c9c7debd29e5bbae0
+"]]);
+$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+try {
+	$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
+	error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
+	error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
+	error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
+	error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
+}
+foreach ($events as $event) {
+	// Postback Event
+	if (($event instanceof \LINE\LINEBot\Event\PostbackEvent)) {
+		$logger->info('Postback message has come');
+		continue;
+	}
+	// Location Event
+	if  ($event instanceof LINE\LINEBot\Event\MessageEvent\LocationMessage) {
+		$logger->info("location -> ".$event->getLatitude().",".$event->getLongitude());
+		continue;
+	}
+	// Message Event = TextMessage
+	if (($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
+		$messageText=strtolower(trim($event->getText()));
+		switch ($messageText) {
+		case "text" : 
+			$outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("text message");
+			break;
+		case "location" :
+			$outputText = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder("Eiffel Tower", "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", 48.858328, 2.294750);
+			break;
+		case "button" :
+			$actions = array (
+				// general message action
+				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
+				// URL type action
+				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
+				// The following two are interactive actions
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
+			);
+			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("button text", "description", $img_url, $actions);
+			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+			break;
+		case "carousel" :
+			$columns = array();
+			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+			for($i=0;$i<5;$i++) {
+				$actions = array(
+					new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Add to Card","action=carousel&button=".$i),
+					new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("View","http://www.google.com")
+				);
+				$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("Title", "description", $img_url , $actions);
+				$columns[] = $column;
+			}
+			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
+			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Carousel Demo", $carousel);
+			break;	
+		case "image" :
+			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+			$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+			break;	
+		case "confirm" :
+			$actions = array (
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
+			);
+			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("problem", $actions);
+			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+			break;
+		default :
+			$outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("demo command: text, location, button, confirm to test message template");	
+			break;
+		}
+		$response = $bot->replyMessage($event->getReplyToken(), $outputText);
+	} } ?>
