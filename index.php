@@ -166,33 +166,30 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-$httpClient = new CurlHTTPClient('hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=');
-$bot = new LINEBot($httpClient, array('channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
-'));
-$events = json_decode($content, true);
-if (!is_null($events)) {
-    //สร้างตัวแปร
-    $replyToken = $events['events'][0]['replyToken'];
-    $typeMessage = $events['events'][0]['message']['type'];
-    $userMessage = $events['events'][0]['message']['text'];
-    $userMessage = strtolower($userMessage);
-    switch ($typeMessage) {
-        case ('text'):
-            switch ($userMessage) {
-                case ('image'):
-                    $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
-                    $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
-                    $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
-                    break;
-                default:
-                    $textReplyMessage = json_encode($events);
-                    $replyData = new TextMessageBuilder($textReplyMessage);
-                    break;
-            }
-    }
-}
-$textMessageBuilder = new TextMessageBuilder(json_encode($events));
-$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+// $events = json_decode($content, true);
+// if (!is_null($events)) {
+//     //สร้างตัวแปร
+//     $replyToken = $events['events'][0]['replyToken'];
+//     $typeMessage = $events['events'][0]['message']['type'];
+//     $userMessage = $events['events'][0]['message']['text'];
+//     $userMessage = strtolower($userMessage);
+//     switch ($typeMessage) {
+//         case ('text'):
+//             switch ($userMessage) {
+//                 case ('image'):
+//                     $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+//                     $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+//                     $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
+//                     break;
+//                 default:
+//                     $textReplyMessage = json_encode($events);
+//                     $replyData = new TextMessageBuilder($textReplyMessage);
+//                     break;
+//             }
+//     }
+// }
+// $textMessageBuilder = new TextMessageBuilder(json_encode($events));
+// $response = $bot->replyMessage($replyToken,$textMessageBuilder);
 
 
 
