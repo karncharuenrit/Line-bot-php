@@ -117,14 +117,7 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 
-if ($message == "รูปแมว"){
-    $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
-    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-    $arrayPostData['messages'][0]['type'] = "image";
-    $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
-    $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
-    replyMsg($arrayHeader,$arrayPostData);
-}
+
 
 if (sizeof($request_array['events']) > 0) {
 
@@ -132,6 +125,15 @@ if (sizeof($request_array['events']) > 0) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
         $datas = [];
+
+        if ($message == "รูปแมว") {
+            $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
+            $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+            $arrayPostData['messages'][0]['type'] = "image";
+            $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
+            $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
+            replyMsg($arrayHeader, $arrayPostData);
+        }
 
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
@@ -153,7 +155,7 @@ if (sizeof($request_array['events']) > 0) {
                 'replyToken' => $reply_token,
                 'messages' => [['type' => 'text', 'text' => $reply_message]]
             ];
-            
+
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
@@ -177,22 +179,23 @@ function send_reply_message($url, $post_header, $post_body)
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
 
-    
-    //รับข้อความจากผู้ใช้
+
+//รับข้อความจากผู้ใช้
 $message = $arrayJson['events'][0]['message']['text'];
 
-function replyMsg($arrayHeader,$arrayPostData){
+function replyMsg($arrayHeader, $arrayPostData)
+{
     $strUrl = "https://api.line.me/v2/bot/message/reply";
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$strUrl);
+    curl_setopt($ch, CURLOPT_URL, $strUrl);
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);    
-    curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($arrayPostData));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $result = curl_exec($ch);
-    curl_close ($ch);
+    curl_close($ch);
 }
 exit;
 ?>
