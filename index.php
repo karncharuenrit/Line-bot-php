@@ -171,6 +171,11 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
+']);
+$response = $bot->revokeChannelAccessToken($accessToken);
+
 $events = json_decode($content, true);
 $replyToken = $events['events'][0]['replyToken'];
 $typeMessage = $events['events'][0]['message']['type'];
