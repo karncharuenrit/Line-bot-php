@@ -117,19 +117,19 @@ if (sizeof($request_array['events']) > 0) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
         $datas = [];
-
+        $event = [];
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                getFormatTextMessage($reply_message);
+                $event['messages'][0] = getFormatTextMessage($reply_message);
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-                getFormatTextMessage($reply_message);
+                $event['messages'][0] = getFormatTextMessage($reply_message);
         } else
             $reply_message = '' . $event['type'] . '';
-            getFormatTextMessage($reply_message);
+            $event['messages'][0] = getFormatTextMessage($reply_message);
 
 
         if (strlen($reply_message) > 0) {
