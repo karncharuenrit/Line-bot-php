@@ -167,6 +167,7 @@ function send_reply_message($url, $post_header, $post_body)
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
 $events = json_decode($content, true);
+$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 if (!is_null($events)) {
     //สร้างตัวแปร
     $replyToken = $events['events'][0]['replyToken'];
@@ -188,7 +189,7 @@ if (!is_null($events)) {
             }
     }
 }
-$textMessageBuilder = new TextMessageBuilder(json_encode($events));
+
 $response = $bot->replyMessage($replyToken,$textMessageBuilder);
 
 
