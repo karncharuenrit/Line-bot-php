@@ -130,7 +130,7 @@ if (sizeof($request_array['events']) > 0) {
         } else
             $reply_message = '' . $event['type'] . '';
           
-        return $reply_message;
+     
 
 
         if (strlen($reply_message) > 0) {
