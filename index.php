@@ -136,10 +136,9 @@ if (sizeof($request_array['events']) > 0) {
         } else
             $reply_message = '' . $event['type'] . '';
 
-        $picFullSize = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
-        $picThumbnail = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
-        $reply_message = new ImageMessageBuilder($picFullSize, $picThumbnail);
-
+        $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+        $outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+        $bot->replyMessage($event->getReplyToken(), $outputText);
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
