@@ -171,6 +171,13 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
+
+$replyToken = $events['events'][0]['replyToken'];
+$typeMessage = $events['events'][0]['message']['type'];
+$userMessage = $events['events'][0]['message']['text'];
+$picFullSize = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
+$picThumbnail = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
+$replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 
 ?>
