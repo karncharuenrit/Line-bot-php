@@ -130,7 +130,7 @@ if (sizeof($request_array['events']) > 0) {
         } else
             $reply_message = '' . $event['type'] . '';
            
-        echo $reply_message;
+        echo $reply_message = '' . $text . '';
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
