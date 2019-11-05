@@ -27,9 +27,8 @@ $database = $factory->createDatabase();
 http_response_code(200);
 
 file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND); //เราใช้เพื่ออ่านข้อมูล Data ที่ LINE ส่งเข้ามาซึ่งเราจะได้ข้อมูลในลักษณะของ Json แบบนี้
-$httpClient = new CurlHTTPClient($accessToken);
-$bot = new LINEBot($httpClient, array('channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
-'));
+
+
 $datas = file_get_contents('php://input'); //$datas : เราสร้างตัวแปรนี้ขึ้นมาเพื่อไว้สำหรับเก็บ Datas ที่เราได้รับมาจาก LINE
 $deCode = json_decode($datas, true); //$decode : เก็บค่า Array หลังจาก Decode แล้วโดยใช้คำสั่ง json_decode
 
@@ -153,13 +152,6 @@ if (sizeof($request_array['events']) > 0) {
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
-            $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-            $outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
-            $response = $bot->replyMessage($event->getReplyToken(), $outputText);
-            if ($response->isSucceeded()) {
-                echo 'Succeeded!';
-                return;
-            }
             echo "Result: " . $send_result . "\r\n";
         }
     }
