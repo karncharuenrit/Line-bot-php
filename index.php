@@ -8,6 +8,7 @@ use Kreait\Firebase\Factory;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
 $factory = (new Factory)
     ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
@@ -40,11 +41,11 @@ $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 function getFormatTextMessage($text)
 {
 
-    $request = [];
-    $request['type'] = 'text';
-    $request['text'] = $text;
+    $datas = [];
+    $datas['type'] = 'text';
+    $datas['text'] = $text;
     echo $text;
-    return $request;
+    return $datas;
 }
 
 // function pushMsg($arrayHeader, $arrayPostData)
@@ -103,6 +104,7 @@ function sentMessage($encodeJson, $datas)
     }
     return $datasReturn;
 }
+//-------------------------------------replymessages------------------------------------------------------------------------------
 
 $API_URL = 'https://api.line.me/v2/bot/message/reply';
 $ACCESS_TOKEN = 'hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
@@ -124,41 +126,35 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-               
         } else
             $reply_message = '' . $event['type'] . '';
-           
-     
+
+
 
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
-            
+
 
             $data = [
                 'replyToken' => $reply_token,
                 'messages' => [['type' => 'text', 'text' => $reply_message]]
             ];
-           
+
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-            
-            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body,$reply_message);
+
+            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
             echo "Result: " . $send_result . "\r\n";
         }
     }
 }
-echo ''.$reply_message.'';
 
-
-
-function send_reply_message($url, $post_header, $post_body,$reply_message)
+function send_reply_message($url, $post_header, $post_body)
 {
     $ch = curl_init($url);
-    getFormatTextMessage($reply_message);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
@@ -169,10 +165,40 @@ function send_reply_message($url, $post_header, $post_body,$reply_message)
 
     return $result;
 }
+//--------------------------------------------------imagebuilder------------------------------------------------
+$events = json_decode($content, true);
+
+if (!is_null($events)) {
+    //สร้างตัวแปร
+    $replyToken = $events['events'][0]['replyToken'];
+    $typeMessage = $events['events'][0]['message']['type'];
+    $userMessage = $events['events'][0]['message']['text'];
+    $userMessage = strtolower($userMessage);
+    switch ($typeMessage) {
+        case ('text'):
+            switch ($userMessage) {
+                case ('image'):
+                    $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+                    $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+                    $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
+                    break;
+                default:
+                    $textReplyMessage = json_encode($events);
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+                    break;
+            }
+    }
+}
+
+$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+
+
+
+
 
 ?>
 
-<!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
+        <!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 // $id = $arrayJson['events'][0]['source']['userId']; //recive id form user 
 $reply_messages = '';
 $messages = [];
@@ -189,4 +215,4 @@ $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojag
 $results = sentMessage($encodeJson, $LINEDatas);; -->
 
 
-<!-- //test2 -->
+        <!-- //test2 -->
