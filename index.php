@@ -40,11 +40,11 @@ $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 function getFormatTextMessage($text)
 {
 
-    $datas = [];
-    $datas['type'] = 'text';
-    $datas['text'] = $text;
+    $request = [];
+    $request['type'] = 'text';
+    $request['text'] = $text;
     echo $text;
-    return $datas;
+    return $request;
 }
 
 // function pushMsg($arrayHeader, $arrayPostData)
@@ -111,6 +111,8 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 
+
+
 if (sizeof($request_array['events']) > 0) {
 
     foreach ($request_array['events'] as $event) {
@@ -135,7 +137,7 @@ if (sizeof($request_array['events']) > 0) {
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
-            echo $reply_message;
+            
 
             $data = [
                 'replyToken' => $reply_token,
@@ -144,7 +146,7 @@ if (sizeof($request_array['events']) > 0) {
            
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
             
-            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
+            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body,$reply_message);
             echo "Result: " . $send_result . "\r\n";
         }
     }
@@ -153,9 +155,10 @@ echo ''.$reply_message.'';
 
 
 
-function send_reply_message($url, $post_header, $post_body)
+function send_reply_message($url, $post_header, $post_body,$reply_message)
 {
     $ch = curl_init($url);
+    getFormatTextMessage($reply_message);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
