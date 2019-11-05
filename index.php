@@ -119,18 +119,17 @@ if (sizeof($request_array['events']) > 0) {
         $datas = [];
 
         if ($event['type'] == 'message') {
-            echo $event;
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-            
+                echo ''.$reply_message.'';
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-         
+                echo ''.$reply_message.'';
         } else
             $reply_message = '' . $event['type'] . '';
-      
+            echo ''.$reply_message.'';
         
 
 
@@ -147,7 +146,7 @@ if (sizeof($request_array['events']) > 0) {
         }
     }
 }
-
+echo ''.$reply_message.'';
 
 
 
