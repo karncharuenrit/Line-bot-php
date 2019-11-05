@@ -116,53 +116,53 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
+$message = $arrayJson['events'][0]['message']['text'];
 
 
-
-if (sizeof($request_array['events']) > 0) {
-
-    foreach ($request_array['events'] as $event) {
-        $reply_message = '';
-        $reply_token = $event['replyToken'];
-        $datas = [];
-
-        if ($message == "รูปแมว") {
-            $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
-            $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-            $arrayPostData['messages'][0]['type'] = "image";
-            $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
-            $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
-            replyMsg($arrayHeader, $arrayPostData);
-        }
-
-        if ($event['type'] == 'message') {
-            if ($event['message']['type'] == 'text') {
-                $text = $event['message']['text'];
-                $reply_message = '' . $text . '';
-            } else
-
-                $reply_message = '' . $event['message']['type'] . '';
-        } else
-            $reply_message = '' . $event['type'] . '';
-
-
-
-
-        if (strlen($reply_message) > 0) {
-            //$reply_message = iconv("tis-620","utf-8",$reply_message);
-
-            $data = [
-                'replyToken' => $reply_token,
-                'messages' => [['type' => 'text', 'text' => $reply_message]]
-            ];
-
-            $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-
-            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
-            echo "Result: " . $send_result . "\r\n";
-        }
-    }
+if ($message == "รูปแมว") {
+    $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
+    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+    $arrayPostData['messages'][0]['type'] = "image";
+    $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
+    $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
+    replyMsg($arrayHeader, $arrayPostData);
 }
+
+// //if (sizeof($request_array['events']) > 0) {
+
+//     foreach ($request_array['events'] as $event) {
+//         $reply_message = '';
+//         $reply_token = $event['replyToken'];
+//         $datas = [];
+
+//         if ($event['type'] == 'message') {
+//             if ($event['message']['type'] == 'text') {
+//                 $text = $event['message']['text'];
+//                 $reply_message = '' . $text . '';
+//             } else
+
+//                 $reply_message = '' . $event['message']['type'] . '';
+//         } else
+//             $reply_message = '' . $event['type'] . '';
+
+
+
+
+//         if (strlen($reply_message) > 0) {
+//             //$reply_message = iconv("tis-620","utf-8",$reply_message);
+
+//             $data = [
+//                 'replyToken' => $reply_token,
+//                 'messages' => [['type' => 'text', 'text' => $reply_message]]
+//             ];
+
+//             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+//             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
+//             echo "Result: " . $send_result . "\r\n";
+//         }
+//     }
+// }
 
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -177,11 +177,7 @@ function send_reply_message($url, $post_header, $post_body)
 
     return $result;
 }
-//--------------------------------------------------imagebuilder------------------------------------------------
-
-
-//รับข้อความจากผู้ใช้
-$message = $arrayJson['events'][0]['message']['text'];
+//--------------------------------------------------imagebuilder-----------------------------------------------
 
 function replyMsg($arrayHeader, $arrayPostData)
 {
