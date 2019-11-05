@@ -172,6 +172,15 @@ function send_reply_message($url, $post_header, $post_body)
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
 
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
+']);
+
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363');
+$response = $bot->replyMessage($httpClient , $textMessageBuilder);
+
+echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 
 ?>
