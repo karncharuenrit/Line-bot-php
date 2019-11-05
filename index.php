@@ -119,8 +119,8 @@ $request_array = json_decode($request, true);   // Decode JSON to Array
 $message = $arrayJson['events'][0]['message']['text'];
 
 
-if ($message == "รูปแมว") {
-    $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
+if ($message == "c1553") {
+    $image_url = "https://support.jastel.co.th/linemonitor/graph/lanc1553.jpg";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
