@@ -144,6 +144,10 @@ if (sizeof($request_array['events']) > 0) {
                 'messages' => [['type' => 'text', 'text' => $reply_message]]
             ];
 
+            $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
+            $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
+            $reply_message = new ImageMessageBuilder($picFullSize, $picThumbnail);
+
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
@@ -166,31 +170,31 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-$events = json_decode($content, true);
-$textMessageBuilder = new TextMessageBuilder(json_encode($events));
-if (!is_null($events)) {
-    //สร้างตัวแปร
-    $replyToken = $events['events'][0]['replyToken'];
-    $typeMessage = $events['events'][0]['message']['type'];
-    $userMessage = $events['events'][0]['message']['text'];
-    $userMessage = strtolower($userMessage);
-    switch ($typeMessage) {
-        case ('text'):
-            switch ($userMessage) {
-                case ('image'):
-                    $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-                    $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-                    $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
-                    break;
-                default:
-                    $textReplyMessage = json_encode($events);
-                    $replyData = new TextMessageBuilder($textReplyMessage);
-                    break;
-            }
-    }
-}
+// $events = json_decode($content, true);
+// $textMessageBuilder = new TextMessageBuilder(json_encode($events));
+// if (!is_null($events)) {
+//     //สร้างตัวแปร
+//     $replyToken = $events['events'][0]['replyToken'];
+//     $typeMessage = $events['events'][0]['message']['type'];
+//     $userMessage = $events['events'][0]['message']['text'];
+//     $userMessage = strtolower($userMessage);
+//     switch ($typeMessage) {
+//         case ('text'):
+//             switch ($userMessage) {
+//                 case ('image'):
+//                     $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
+//                     $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
+//                     $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
+//                     break;
+//                 default:
+//                     $textReplyMessage = json_encode($events);
+//                     $replyData = new TextMessageBuilder($textReplyMessage);
+//                     break;
+//             }
+//     }
+// }
 
-$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
 
 
