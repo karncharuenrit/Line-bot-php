@@ -171,20 +171,8 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($accessToken);
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '0b524fb063d9b92c9c7debd29e5bbae0
-']);
-$response = $bot->revokeChannelAccessToken($accessToken);
-
-$events = json_decode($content, true);
-$replyToken = $events['events'][0]['replyToken'];
-$typeMessage = $events['events'][0]['message']['type'];
-$userMessage = $events['events'][0]['message']['text'];
-$picFullSize = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
-$picThumbnail = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
-$replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
-$response = $bot->replyMessage($replyToken,$replyData);
+
 ?>
 
 <!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
