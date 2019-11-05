@@ -122,7 +122,7 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                global $text;
+                
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
@@ -130,7 +130,7 @@ if (sizeof($request_array['events']) > 0) {
         } else
             $reply_message = '' . $event['type'] . '';
            
-
+        echo $reply_message;
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
@@ -146,7 +146,7 @@ if (sizeof($request_array['events']) > 0) {
     }
 }
 
-echo $text;
+
 
 
 function send_reply_message($url, $post_header, $post_body)
