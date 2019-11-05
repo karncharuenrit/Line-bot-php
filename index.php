@@ -144,9 +144,7 @@ if (sizeof($request_array['events']) > 0) {
                 'messages' => [['type' => 'text', 'text' => $reply_message]]
             ];
 
-            $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-            $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-            $reply_message = new ImageMessageBuilder($picFullSize, $picThumbnail);
+
 
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
@@ -170,31 +168,74 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-// $events = json_decode($content, true);
-// $textMessageBuilder = new TextMessageBuilder(json_encode($events));
-// if (!is_null($events)) {
-//     //สร้างตัวแปร
-//     $replyToken = $events['events'][0]['replyToken'];
-//     $typeMessage = $events['events'][0]['message']['type'];
-//     $userMessage = $events['events'][0]['message']['text'];
-//     $userMessage = strtolower($userMessage);
-//     switch ($typeMessage) {
-//         case ('text'):
-//             switch ($userMessage) {
-//                 case ('image'):
-//                     $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-//                     $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
-//                     $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
-//                     break;
-//                 default:
-//                     $textReplyMessage = json_encode($events);
-//                     $replyData = new TextMessageBuilder($textReplyMessage);
-//                     break;
-//             }
-//     }
-// }
-
-$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+foreach ($events as $event) {
+    // Postback Event
+    if (($event instanceof \LINE\LINEBot\Event\PostbackEvent)) {
+        $logger->info('Postback message has come');
+        continue;
+    }
+    // Location Event
+    if ($event instanceof LINE\LINEBot\Event\MessageEvent\LocationMessage) {
+        $logger->info("location -> " . $event->getLatitude() . "," . $event->getLongitude());
+        continue;
+    }
+    // Message Event = TextMessage
+    if (($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
+        $messageText = strtolower(trim($event->getText()));
+        switch ($messageText) {
+            case "text":
+                $outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("text message");
+                break;
+            case "location":
+                $outputText = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder("Eiffel Tower", "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", 48.858328, 2.294750);
+                break;
+            case "button":
+                $actions = array(
+                    // general message action
+                    new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
+                    // URL type action
+                    new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
+                    // The following two are interactive actions
+                    new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
+                    new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
+                );
+                $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+                $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("button text", "description", $img_url, $actions);
+                $outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+                break;
+            case "carousel":
+                $columns = array();
+                $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+                for ($i = 0; $i < 5; $i++) {
+                    $actions = array(
+                        new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Add to Card", "action=carousel&button=" . $i),
+                        new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("View", "http://www.google.com")
+                    );
+                    $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("Title", "description", $img_url, $actions);
+                    $columns[] = $column;
+                }
+                $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
+                $outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Carousel Demo", $carousel);
+                break;
+            case "image":
+                $img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+                $outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+                break;
+            case "confirm":
+                $actions = array(
+                    new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
+                    new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
+                );
+                $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("problem", $actions);
+                $outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+                break;
+            default:
+                $outputText = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("demo command: text, location, button, confirm to test message template");
+                break;
+        }
+        $response = $bot->replyMessage($event->getReplyToken(), $outputText);
+    }
+}
 
 
 
@@ -202,7 +243,7 @@ $response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
 ?>
 
-        <!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
+    <!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 // $id = $arrayJson['events'][0]['source']['userId']; //recive id form user 
 $reply_messages = '';
 $messages = [];
@@ -219,4 +260,4 @@ $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojag
 $results = sentMessage($encodeJson, $LINEDatas);; -->
 
 
-        <!-- //test2 -->
+    <!-- //test2 -->
