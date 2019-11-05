@@ -177,8 +177,8 @@ if (!is_null($events)) {
         case ('text'):
             switch ($userMessage) {
                 case ('image'):
-                    $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
-                    $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+                    $picFullSize = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
+                    $picThumbnail = 'https://sites.create-cdn.net/siteimages/29/4/1/294148/17/6/1/17614285/1311x1308.jpg?1566984709';
                     $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
                     break;
                 default:
