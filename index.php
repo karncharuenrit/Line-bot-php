@@ -166,30 +166,30 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-// $events = json_decode($content, true);
-// if (!is_null($events)) {
-//     //สร้างตัวแปร
-//     $replyToken = $events['events'][0]['replyToken'];
-//     $typeMessage = $events['events'][0]['message']['type'];
-//     $userMessage = $events['events'][0]['message']['text'];
-//     $userMessage = strtolower($userMessage);
-//     switch ($typeMessage) {
-//         case ('text'):
-//             switch ($userMessage) {
-//                 case ('image'):
-//                     $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
-//                     $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
-//                     $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
-//                     break;
-//                 default:
-//                     $textReplyMessage = json_encode($events);
-//                     $replyData = new TextMessageBuilder($textReplyMessage);
-//                     break;
-//             }
-//     }
-// }
-// $textMessageBuilder = new TextMessageBuilder(json_encode($events));
-// $response = $bot->replyMessage($replyToken,$textMessageBuilder);
+$events = json_decode($content, true);
+if (!is_null($events)) {
+    //สร้างตัวแปร
+    $replyToken = $events['events'][0]['replyToken'];
+    $typeMessage = $events['events'][0]['message']['type'];
+    $userMessage = $events['events'][0]['message']['text'];
+    $userMessage = strtolower($userMessage);
+    switch ($typeMessage) {
+        case ('text'):
+            switch ($userMessage) {
+                case ('image'):
+                    $picFullSize = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+                    $picThumbnail = 'https://www.picz.in.th/image/netflow4.gxLlB0';
+                    $replyData = new ImageMessageBuilder($picFullSize, $picThumbnail);
+                    break;
+                default:
+                    $textReplyMessage = json_encode($events);
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+                    break;
+            }
+    }
+}
+$textMessageBuilder = new TextMessageBuilder(json_encode($events));
+$response = $bot->replyMessage($replyToken,$textMessageBuilder);
 
 
 
