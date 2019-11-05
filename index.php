@@ -122,14 +122,14 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                $datas['messages'][0] = getFormatTextMessage($text);
+                global $text;
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-                $datas['messages'][0] = getFormatTextMessage($text);
+        
         } else
             $reply_message = '' . $event['type'] . '';
-            $datas['messages'][0] = getFormatTextMessage($text);
+           
 
 
         if (strlen($reply_message) > 0) {
@@ -146,7 +146,7 @@ if (sizeof($request_array['events']) > 0) {
     }
 }
 
-echo 'ok';
+echo $text;
 
 
 function send_reply_message($url, $post_header, $post_body)
