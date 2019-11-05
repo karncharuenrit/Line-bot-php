@@ -122,25 +122,28 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                echo $event['message'][0]['text'];
+                
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-                echo $event['message'][0]['text'];
+               
         } else
             $reply_message = '' . $event['type'] . '';
-            echo $event['message'][0]['text'];
+           
      
 
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
+            echo $reply_message;
+
             $data = [
                 'replyToken' => $reply_token,
                 'messages' => [['type' => 'text', 'text' => $reply_message]]
             ];
+           
             $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-
+            
             $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
             echo "Result: " . $send_result . "\r\n";
         }
