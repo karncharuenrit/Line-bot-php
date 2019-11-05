@@ -117,7 +117,7 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 
-if ($message == "image"){
+if ($message == "รูปแมว"){
     $image_url = "https://i.pinimg.com/originals/cc/22/d1/cc22d10d9096e70fe3dbe3be2630182b.jpg";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
@@ -179,7 +179,7 @@ function send_reply_message($url, $post_header, $post_body)
 
     
     //รับข้อความจากผู้ใช้
-    $message = $arrayJson['events'][0]['message']['text'];
+$message = $arrayJson['events'][0]['message']['text'];
 
 function replyMsg($arrayHeader,$arrayPostData){
     $strUrl = "https://api.line.me/v2/bot/message/reply";
