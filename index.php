@@ -122,14 +122,14 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                getFormatTextMessage($event);
+                getFormatTextMessage($reply_message);
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-                getFormatTextMessage($event);
+                getFormatTextMessage($reply_message);
         } else
             $reply_message = '' . $event['type'] . '';
-            getFormatTextMessage($event);
+            getFormatTextMessage($reply_message);
 
 
         if (strlen($reply_message) > 0) {
