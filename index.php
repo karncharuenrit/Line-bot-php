@@ -166,8 +166,9 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 //--------------------------------------------------imagebuilder------------------------------------------------
-$httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
-$bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
+$httpClient = new CurlHTTPClient('hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=');
+$bot = new LINEBot($httpClient, array('0b524fb063d9b92c9c7debd29e5bbae0
+' => LINE_MESSAGE_CHANNEL_SECRET));
 $events = json_decode($content, true);
 if (!is_null($events)) {
     //สร้างตัวแปร
@@ -191,7 +192,7 @@ if (!is_null($events)) {
     }
 }
 $textMessageBuilder = new TextMessageBuilder(json_encode($events));
-$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
 
 
