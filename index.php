@@ -117,20 +117,28 @@ if (sizeof($request_array['events']) > 0) {
         $reply_message = '';
         $reply_token = $event['replyToken'];
         $datas = [];
-       
+
         if ($event['type'] == 'message') {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                
+                $datas = [];
+                $event['type'] = 'text';
+                $event['text'] = $text;
+                echo $text;
             } else
 
                 $reply_message = '' . $event['message']['type'] . '';
-        
+            $event['message']['type'] = 'text';
+            $event['text'] = $text;
+            echo $text;
         } else
             $reply_message = '' . $event['type'] . '';
-           
-        echo $reply_message = '' . $text . '';
+        $event['type'] = 'text';
+        $event['text'] = $text;
+        echo $text;
+        
+
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
