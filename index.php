@@ -121,13 +121,20 @@ if (sizeof($request_array['events']) > 0) {
             if ($event['message']['type'] == 'text') {
                 $text = $event['message']['text'];
                 $reply_message = '' . $text . '';
-                echo $reply_message;
             } else
-            
-            $reply_message = '' . $event['message']['type'] . '';
-        } else
-        $reply_message = '' . $event['type'] . '';
 
+                $reply_message = '' . $event['message']['type'] . '';
+        } else
+            $reply_message = '' . $event['type'] . '';
+        if (!is_null($event)) {
+            // ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
+            $reply_messages = '';
+            $messages = [];
+            $messages['messages'][0] = getFormatTextMessage(''.$text.'');
+            $messages['replyToken'] = $replyToken;
+            $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
+            $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
+        }
 
         if (strlen($reply_message) > 0) {
             //$reply_message = iconv("tis-620","utf-8",$reply_message);
@@ -143,7 +150,7 @@ if (sizeof($request_array['events']) > 0) {
     }
 }
 
-echo $reply_message;
+
 
 
 function send_reply_message($url, $post_header, $post_body)
