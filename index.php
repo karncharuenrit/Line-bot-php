@@ -120,7 +120,7 @@ $message = $arrayJson['events'][0]['message']['text'];
 
 
 if ($message == "c1553") {
-    $image_url = "https://support.jastel.co.th/linemonitor/graph/lanc1553.jpg";
+    $image_url = "https://support.jastel.co.th/linemonitor/graph/lanc1553resize.jpg";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
