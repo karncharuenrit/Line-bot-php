@@ -126,7 +126,22 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
+} elseif ($messaage == "c1521") {
+    $image_url = "https://lh3.googleusercontent.com/YKckTcdBzSbTBzAjteTKVRGtvv584CjTq6-tlSt_PySW8yY5LhPwOJm0A_B5vXvPqFuoEpXDEvCH26lLhQ9d1K39vv0WBcrctZpfXgjg5BqqrUGd4iOT5_FtwbpkVqIBBKG9_456cQ8OQh2cIeuKQWHFgdqgb5awBhcqKPYC67CHtCLhUb5x8uK_S_G4DaF4dh60dxSQ5GsThwYvWriblqeGZv57dzgk2Lx3-zO6KSf7nrV8qpRuauQsuT2mOTWQgVhvm57UaSHzswXFw5U_XENdWCs3ADuX9eBnutdfKFEh2gkSR0TI_0cYu3aiWz-sPgi5QrvQwq3mjfovT7-jPGmzADPjTYBXuBjPLTFWQPjR1tQJ-oEQgqqI_TZmsj7YzlYUTFs3pQPCtLNnQUWKK4lM1A6G-P-mFgCB57XrDtclkjWp70Wky2nv5sdGdojVjzN483qC85C66sI9XTCihBOvXI5bBeiO1-DyzEmKIsSdLAs8MYbA6VWR_DqckvPYA1raiZ8Cy4hbdfl9zkdMraJcXBpBMfcsLe66BVQepa6UV6oxKsOE3WI6btq86NlF8FLI24AJnIq919sxyKCz5wtgAF1xPVwJ4trDmBBy4rrAUiHuNxanqeg9XLrsKqUNZ03gDxnTp76YwIn9AOWCywmYIhDqEEbCIlBzsU77UBltL6XjVtFk=w603-h211-no";
+    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+    $arrayPostData['messages'][0]['type'] = "image";
+    $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
+    $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
+    replyMsg($arrayHeader, $arrayPostData);
+} elseif ($messaage == "c1532") {
+    $image_url = "https://lh3.googleusercontent.com/YKckTcdBzSbTBzAjteTKVRGtvv584CjTq6-tlSt_PySW8yY5LhPwOJm0A_B5vXvPqFuoEpXDEvCH26lLhQ9d1K39vv0WBcrctZpfXgjg5BqqrUGd4iOT5_FtwbpkVqIBBKG9_456cQ8OQh2cIeuKQWHFgdqgb5awBhcqKPYC67CHtCLhUb5x8uK_S_G4DaF4dh60dxSQ5GsThwYvWriblqeGZv57dzgk2Lx3-zO6KSf7nrV8qpRuauQsuT2mOTWQgVhvm57UaSHzswXFw5U_XENdWCs3ADuX9eBnutdfKFEh2gkSR0TI_0cYu3aiWz-sPgi5QrvQwq3mjfovT7-jPGmzADPjTYBXuBjPLTFWQPjR1tQJ-oEQgqqI_TZmsj7YzlYUTFs3pQPCtLNnQUWKK4lM1A6G-P-mFgCB57XrDtclkjWp70Wky2nv5sdGdojVjzN483qC85C66sI9XTCihBOvXI5bBeiO1-DyzEmKIsSdLAs8MYbA6VWR_DqckvPYA1raiZ8Cy4hbdfl9zkdMraJcXBpBMfcsLe66BVQepa6UV6oxKsOE3WI6btq86NlF8FLI24AJnIq919sxyKCz5wtgAF1xPVwJ4trDmBBy4rrAUiHuNxanqeg9XLrsKqUNZ03gDxnTp76YwIn9AOWCywmYIhDqEEbCIlBzsU77UBltL6XjVtFk=w603-h211-no";
+    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+    $arrayPostData['messages'][0]['type'] = "image";
+    $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
+    $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
+    replyMsg($arrayHeader, $arrayPostData);
 }
+
 
 // //if (sizeof($request_array['events']) > 0) {
 
