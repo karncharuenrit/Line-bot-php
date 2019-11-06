@@ -121,14 +121,14 @@ $message = $arrayJson['events'][0]['message']['text'];
 
 
 if ($message == "c1553") {
-    $image_url = "https://lh3.googleusercontent.com/YKckTcdBzSbTBzAjteTKVRGtvv584CjTq6-tlSt_PySW8yY5LhPwOJm0A_B5vXvPqFuoEpXDEvCH26lLhQ9d1K39vv0WBcrctZpfXgjg5BqqrUGd4iOT5_FtwbpkVqIBBKG9_456cQ8OQh2cIeuKQWHFgdqgb5awBhcqKPYC67CHtCLhUb5x8uK_S_G4DaF4dh60dxSQ5GsThwYvWriblqeGZv57dzgk2Lx3-zO6KSf7nrV8qpRuauQsuT2mOTWQgVhvm57UaSHzswXFw5U_XENdWCs3ADuX9eBnutdfKFEh2gkSR0TI_0cYu3aiWz-sPgi5QrvQwq3mjfovT7-jPGmzADPjTYBXuBjPLTFWQPjR1tQJ-oEQgqqI_TZmsj7YzlYUTFs3pQPCtLNnQUWKK4lM1A6G-P-mFgCB57XrDtclkjWp70Wky2nv5sdGdojVjzN483qC85C66sI9XTCihBOvXI5bBeiO1-DyzEmKIsSdLAs8MYbA6VWR_DqckvPYA1raiZ8Cy4hbdfl9zkdMraJcXBpBMfcsLe66BVQepa6UV6oxKsOE3WI6btq86NlF8FLI24AJnIq919sxyKCz5wtgAF1xPVwJ4trDmBBy4rrAUiHuNxanqeg9XLrsKqUNZ03gDxnTp76YwIn9AOWCywmYIhDqEEbCIlBzsU77UBltL6XjVtFk=w603-h211-no";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/lanc1553.jpg.png?alt=media&token=80dc33c1-0180-481f-b45d-df5f03e624ab";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1112") {
-    $image_url = "https://lh3.googleusercontent.com/a0223D3BfJG0lai-LuwiU3nLuhuAWqZtHrQ2o-4rTsBqZNuV8uI-NsfDLUOZnbGmZWaDMjb7ycocJ-X6J4zMxHE63suCo_lH6sBXNvI34lz5-eFOydJ09QtTThGWguJT9LrWb3vUrIUPdE9Q6ekIWJzAld18uRT8AGdcC_CYFEdO6xlCYW8A01hKkZ0iDiOgec2nYSrkVw4TGCBjtiI8cz0JHz2iDZUSP2gBQAgW0WCXv6is2W4DUXKBd1LcTNeSanbbxuX_e2hbo2-fOofbZlyIHBE1rjJDdVLHwPtQnPmEuCPFsbn8SDN8doDkZ-xtYpeYPEtZWeLUoK_ejCROgAHsDungVGrVuI8NmNOM8WOqwkW6L2S6cpzyDLc4uRj-Y3HkDc86NqFxS-0P-mUDAIyf8XuaaxTx1mxAXPxV4FtKfbVHEP4Ey7Cev4UzoO2pemLNAVxDhQvmPJMxiefFF0Ozl3ETSj5rDQUq8EetyDhZrIVaxT_jQzMDntgwBunteDgzo3wa-zJg-TAinaOjf9ti66PhGUyKGXwJffg8F6CxuG5kEmlh9iIyXPpcJLRPK4GjjDSi43TrcfgI62951_RQuGg6DxBUnpicIpenbYRwfBXohScNY7mWHseB-dYjCfF6JO5kwnR8bT_njDLlETVsTskj3K-ScVgsDWJ3qjkCo0onq-9u=w603-h243-no";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1112.png?alt=media&token=c97a4df9-bbdb-4eb4-accd-aeb3d84476f5";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
