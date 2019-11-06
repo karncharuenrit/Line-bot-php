@@ -116,9 +116,7 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
-$message = $arrayJson['events'][0]['message']['text'];
-$message = strtolower($messaage);
-
+$message = strtolower($arrayJson['events'][0]['message']['text']);
 
 if ($message == "c1553") {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/lanc1553.jpg.png?alt=media&token=80dc33c1-0180-481f-b45d-df5f03e624ab";
