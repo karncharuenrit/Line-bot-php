@@ -135,7 +135,7 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1478") {
-    $image_url = "https://lh3.googleusercontent.com/IRdAyr1X0yp8U3_CVsH-iZ5tQ0kn03i1cHsT4s2a6RCT3Dpus3-a-mFyIUlzyji6r8oF7u0GL9QzkaFcS8FkDRCYQqzMclkHdMX6oILUe8Tn_hzbDqt40wk9bIBwjQFAZJQMJ7Hm_RMTepY5nONsrX407bwulMmqNtSm07odUZMt6prumvsGikinl1Kjg5Z3WwS3BGIZqbTwe7YNuX9W5U-jiB-4ovHjSEdN_NRvjj8hD-kQ2pqSIRfBZXAQeIqiMevpGHw_Du-FLnLYYXX9faQiyhZezRqbwEJH0wOobr8RJhh83xL3rMJCsGP3-nQVDAfrwMh8Kx4XgysRQfvKFjW4Dapx6qvV__J8TNa2A5n0n4H5WOm4JsxY2QxtUX8vKwh6OL_Oos2ZfwSucU04ue4ifm4tVUC_kXZEuEWUkhuX1kqbdty4SB0kaEp1M9v3RXShLwxyLG4a_4AF8oZYltXOKAVoX4kYeYcSCfA8REKHD0qrguwjvYT7CpPoSc529j8McnS4zNtcgx9--JObxQA24T361W4ae5oo8KK64ut54kf-3_MVWPNiN5qUQA8h01Rs5yhFw4mYAArbo9h8I9176K1p5X-3MOWxalwYRm84gb-IVGvAR1rdrBdHVlPFTddgb8fwmnFfBtDo7Q6NHDXSHYx-pkfwJAkM7vM6AH-KJE8XhXnM=w609-h211-no";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=44ed3395-e1d1-4365-9c66-8947106841db";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
