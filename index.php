@@ -120,7 +120,7 @@ $message = $arrayJson['events'][0]['message']['text'];
 
 
 
-if ($message == "c1553") {
+if ($message == strtolower("c1553")) {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/lanc1553.jpg.png?alt=media&token=80dc33c1-0180-481f-b45d-df5f03e624ab";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
@@ -128,14 +128,14 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
  
     replyMsg($arrayHeader, $arrayPostData);
-} else if ($message == "c1112") {
+} else if ($message == strtolower("c1112")) {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1112.png?alt=media&token=c97a4df9-bbdb-4eb4-accd-aeb3d84476f5";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
-} else if ($message == "c1478") {
+} else if ($message == strtolower("c1478")) {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=44ed3395-e1d1-4365-9c66-8947106841db";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
