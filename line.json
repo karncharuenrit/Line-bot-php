@@ -1,0 +1,82 @@
+{
+    "type": "flex",
+    "altText": "Flex Message",
+    "contents": {
+      "type": "bubble",
+      "direction": "ltr",
+      "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Header",
+            "align": "center",
+            "color": "#0C0404"
+          },
+          {
+            "type": "image",
+            "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png"
+          }
+        ]
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Text"
+          },
+          {
+            "type": "text",
+            "text": "Text"
+          },
+          {
+            "type": "text",
+            "text": "Text"
+          },
+          {
+            "type": "text",
+            "text": "Text"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "Button",
+              "uri": "https://linecorp.com"
+            }
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "Button",
+              "uri": "https://linecorp.com"
+            }
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "button",
+                "action": {
+                  "type": "uri",
+                  "label": "Button",
+                  "uri": "https://linecorp.com"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

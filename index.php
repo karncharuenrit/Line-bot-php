@@ -11,6 +11,7 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
 
+
 $factory = (new Factory)
     ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
     // The following line is optional if the project id in your credentials file
@@ -42,6 +43,12 @@ $arrayHeader[] = "Content-Type: application/json";
 $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
 
+
+
+
+
+
+
 function getFormatTextMessage($text)
 {
 
@@ -67,7 +74,7 @@ function getFormatTextMessage($text)
 //     curl_close($ch);
 // }
 // exit;
-
+// $jsonFlex = 
 
 function sentMessage($encodeJson, $datas)
 {
@@ -126,6 +133,13 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     // $arrayPostData['messages'][1]['type'] = "text";
     // $arrayPostData['messages'][1]['text'] = "C1553";
+    new BoxComponentBuilder(
+        "horizontal",
+        array(
+            new TextComponentBuilder("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.",NULL,NULL,NULL,NULL,NULL,true)
+        )
+        );
  
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1112") {
