@@ -135,7 +135,7 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1478") {
-    $image_url = "https://support.jastel.co.th/cacti/graph_image.php?action=edit&local_graph_id=10329&rra_id=1";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=44ed3395-e1d1-4365-9c66-8947106841db";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
