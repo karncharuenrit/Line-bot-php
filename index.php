@@ -128,14 +128,14 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1112") {
-    $image_url = "https://support.jastel.co.th/95p/graph_pic/CYBER_WORLD_C0683/CYBER_WORLD_C0683_1572541200_1573008720.png";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1112.png?alt=media&token=c97a4df9-bbdb-4eb4-accd-aeb3d84476f5";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1478") {
-    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=44ed3395-e1d1-4365-9c66-8947106841db";
+    $image_url = "https://support.jastel.co.th/cacti/graph_image.php?action=edit&local_graph_id=10329&rra_id=1";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
