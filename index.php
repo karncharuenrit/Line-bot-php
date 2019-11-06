@@ -119,7 +119,7 @@ $request_array = json_decode($request, true);   // Decode JSON to Array
 $message = strtolower($arrayJson['events'][0]['message']['text']);
 
 if ($message == "c1553") {
-    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/lanc1553.jpg.png?alt=media&token=80dc33c1-0180-481f-b45d-df5f03e624ab";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1553.png?alt=media&token=e38663ba-8a34-4daf-b333-5d4952397cd8";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
@@ -129,14 +129,14 @@ if ($message == "c1553") {
  
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1112") {
-    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1112.png?alt=media&token=c97a4df9-bbdb-4eb4-accd-aeb3d84476f5";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/CYBER_WORLD_C1112.png?alt=media&token=a3c5187b-fb19-4b24-9d5f-c343df6dfbf7";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1478") {
-    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=44ed3395-e1d1-4365-9c66-8947106841db";
+    $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1478.png?alt=media&token=adf52fd6-0d58-44ad-abaf-aadb742b69f4";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
