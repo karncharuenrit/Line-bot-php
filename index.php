@@ -126,21 +126,21 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
-}if ($messaage == "c1112") {
+} else if ($messaage == "c1112") {
     $image_url = "https://lh3.googleusercontent.com/a0223D3BfJG0lai-LuwiU3nLuhuAWqZtHrQ2o-4rTsBqZNuV8uI-NsfDLUOZnbGmZWaDMjb7ycocJ-X6J4zMxHE63suCo_lH6sBXNvI34lz5-eFOydJ09QtTThGWguJT9LrWb3vUrIUPdE9Q6ekIWJzAld18uRT8AGdcC_CYFEdO6xlCYW8A01hKkZ0iDiOgec2nYSrkVw4TGCBjtiI8cz0JHz2iDZUSP2gBQAgW0WCXv6is2W4DUXKBd1LcTNeSanbbxuX_e2hbo2-fOofbZlyIHBE1rjJDdVLHwPtQnPmEuCPFsbn8SDN8doDkZ-xtYpeYPEtZWeLUoK_ejCROgAHsDungVGrVuI8NmNOM8WOqwkW6L2S6cpzyDLc4uRj-Y3HkDc86NqFxS-0P-mUDAIyf8XuaaxTx1mxAXPxV4FtKfbVHEP4Ey7Cev4UzoO2pemLNAVxDhQvmPJMxiefFF0Ozl3ETSj5rDQUq8EetyDhZrIVaxT_jQzMDntgwBunteDgzo3wa-zJg-TAinaOjf9ti66PhGUyKGXwJffg8F6CxuG5kEmlh9iIyXPpcJLRPK4GjjDSi43TrcfgI62951_RQuGg6DxBUnpicIpenbYRwfBXohScNY7mWHseB-dYjCfF6JO5kwnR8bT_njDLlETVsTskj3K-ScVgsDWJ3qjkCo0onq-9u=w603-h243-no";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
-    replyMsg($arrayHeader, $arrayPostData);}
- 
-if ($messaage == "c1478") {
+    replyMsg($arrayHeader, $arrayPostData);
+} else if ($messaage == "c1478") {
     $image_url = "https://lh3.googleusercontent.com/IRdAyr1X0yp8U3_CVsH-iZ5tQ0kn03i1cHsT4s2a6RCT3Dpus3-a-mFyIUlzyji6r8oF7u0GL9QzkaFcS8FkDRCYQqzMclkHdMX6oILUe8Tn_hzbDqt40wk9bIBwjQFAZJQMJ7Hm_RMTepY5nONsrX407bwulMmqNtSm07odUZMt6prumvsGikinl1Kjg5Z3WwS3BGIZqbTwe7YNuX9W5U-jiB-4ovHjSEdN_NRvjj8hD-kQ2pqSIRfBZXAQeIqiMevpGHw_Du-FLnLYYXX9faQiyhZezRqbwEJH0wOobr8RJhh83xL3rMJCsGP3-nQVDAfrwMh8Kx4XgysRQfvKFjW4Dapx6qvV__J8TNa2A5n0n4H5WOm4JsxY2QxtUX8vKwh6OL_Oos2ZfwSucU04ue4ifm4tVUC_kXZEuEWUkhuX1kqbdty4SB0kaEp1M9v3RXShLwxyLG4a_4AF8oZYltXOKAVoX4kYeYcSCfA8REKHD0qrguwjvYT7CpPoSc529j8McnS4zNtcgx9--JObxQA24T361W4ae5oo8KK64ut54kf-3_MVWPNiN5qUQA8h01Rs5yhFw4mYAArbo9h8I9176K1p5X-3MOWxalwYRm84gb-IVGvAR1rdrBdHVlPFTddgb8fwmnFfBtDo7Q6NHDXSHYx-pkfwJAkM7vM6AH-KJE8XhXnM=w609-h211-no";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "image";
     $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
-    replyMsg($arrayHeader, $arrayPostData);}
+    replyMsg($arrayHeader, $arrayPostData);
+}
 
 
 
@@ -227,4 +227,3 @@ $encodeJson = json_encode($messages);
 $LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
 $LINEDatas['token'] = "hV49GKQw+K2jv0VCyJ2BT6tYiQm6dwweGBtDCW/TrudXBXzju8p0rojagOepJgAXaQ0Z0B2ZOQHHW4jMYWifptIb29Gew62KWD/8oMSN+eHFgyoZ9trsFeI06j2YId2mSxEcnypVdsUn0fz3GP5uIQdB04t89/1O/w1cDnyilFU=";
 $results = sentMessage($encodeJson, $LINEDatas);; -->
-
