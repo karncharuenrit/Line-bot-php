@@ -10,7 +10,10 @@ use LINE\LINEBot\HTTPClient;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
-
+$host = 'localhost';
+$username = 'root';
+$password = 'root';
+mysql_connect($host,$username,$password);
 
 $factory = (new Factory)
     ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
