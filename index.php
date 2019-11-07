@@ -42,12 +42,124 @@ $arrayHeader = array();
 $arrayHeader[] = "Content-Type: application/json";
 $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
-
-
-
-
-
-
+$jsonFlex = [
+    "type" => "flex",
+    "altText" => "Hello Flex Message",
+    "contents" => [
+      "type" => "bubble",
+      "direction" => "ltr",
+      "header" => [
+        "type" => "box",
+        "layout" => "vertical",
+        "contents" => [
+          [
+            "type" => "text",
+            "text" => "Purchase",
+            "size" => "lg",
+            "align" => "start",
+            "weight" => "bold",
+            "color" => "#009813"
+          ],
+          [
+            "type" => "text",
+            "text" => "฿ 100.00",
+            "size" => "3xl",
+            "weight" => "bold",
+            "color" => "#000000"
+          ],
+          [
+            "type" => "text",
+            "text" => "Rabbit Line Pay",
+            "size" => "lg",
+            "weight" => "bold",
+            "color" => "#000000"
+          ],
+          [
+            "type" => "text",
+            "text" => "2019.02.14 21:47 (GMT+0700)",
+            "size" => "xs",
+            "color" => "#B2B2B2"
+          ],
+          [
+            "type" => "text",
+            "text" => "Payment complete.",
+            "margin" => "lg",
+            "size" => "lg",
+            "color" => "#000000"
+          ]
+        ]
+      ],
+      "body" => [
+        "type" => "box",
+        "layout" => "vertical",
+        "contents" => [
+          [
+            "type" => "separator",
+            "color" => "#C3C3C3"
+          ],
+          [
+            "type" => "box",
+            "layout" => "baseline",
+            "margin" => "lg",
+            "contents" => [
+              [
+                "type" => "text",
+                "text" => "Merchant",
+                "align" => "start",
+                "color" => "#C3C3C3"
+              ],
+              [
+                "type" => "text",
+                "text" => "BTS 01",
+                "align" => "end",
+                "color" => "#000000"
+              ]
+            ]
+          ],
+          [
+            "type" => "box",
+            "layout" => "baseline",
+            "margin" => "lg",
+            "contents" => [
+              [
+                "type" => "text",
+                "text" => "New balance",
+                "color" => "#C3C3C3"
+              ],
+              [
+                "type" => "text",
+                "text" => "฿ 45.57",
+                "align" => "end"
+              ]
+            ]
+          ],
+          [
+            "type" => "separator",
+            "margin" => "lg",
+            "color" => "#C3C3C3"
+          ]
+        ]
+      ],
+      "footer" => [
+        "type" => "box",
+        "layout" => "horizontal",
+        "contents" => [
+          [
+            "type" => "text",
+            "text" => "View Details",
+            "size" => "lg",
+            "align" => "start",
+            "color" => "#0084B6",
+            "action" => [
+              "type" => "uri",
+              "label" => "View Details",
+              "uri" => "https://google.co.th/"
+            ]
+          ]
+        ]
+      ]
+    ]
+  ];
 
 function getFormatTextMessage($text)
 {
@@ -125,6 +237,9 @@ $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 $message = strtolower($arrayJson['events'][0]['message']['text']);
 
+
+
+
 if ($message == "c1553") {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1553.png?alt=media&token=e38663ba-8a34-4daf-b333-5d4952397cd8";
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
@@ -133,14 +248,7 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     // $arrayPostData['messages'][1]['type'] = "text";
     // $arrayPostData['messages'][1]['text'] = "C1553";
-    new BoxComponentBuilder(
-        "horizontal",
-        array(
-            new TextComponentBuilder("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.",NULL,NULL,NULL,NULL,NULL,true)
-        )
-        );
- 
+    
     replyMsg($arrayHeader, $arrayPostData);
 } else if ($message == "c1112") {
     $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/CYBER_WORLD_C1112.png?alt=media&token=a3c5187b-fb19-4b24-9d5f-c343df6dfbf7";
@@ -157,10 +265,14 @@ if ($message == "c1553") {
     $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
     replyMsg($arrayHeader, $arrayPostData);
 } else {
+    $data =  [
+        'replytoken' => $replyToken,
+        'messages'=> $$jsonFlex
+     ];
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "text";
     $arrayPostData['messages'][0]['text'] = "กรุณาระบุ CID ให้ถูกต้อง";
-    replyMsg($arrayHeader, $arrayPostData);
+    replyMsg($arrayHeader, $arrayPostData, $data);
 }
 
 
