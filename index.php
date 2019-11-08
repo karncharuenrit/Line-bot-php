@@ -144,7 +144,7 @@ if ($message == "c1553") {
   $arrayPostData['messages'][0]['originalContentUrl'] = $image_url;
   $arrayPostData['messages'][0]['previewImageUrl'] = $image_url;
   replyMsg($arrayHeader, $arrayPostData);
-} else if ($message == "c1478") {
+} else if ($message == "c1096") {
   $image_url = "https://firebasestorage.googleapis.com/v0/b/readsid-5a802.appspot.com/o/c1096_1.png?alt=media&token=89517fc8-3798-42cb-86d4-cadf40dcecdb";
   $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
   $arrayPostData['messages'][0]['type'] = "image";
