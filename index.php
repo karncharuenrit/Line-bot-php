@@ -10,7 +10,7 @@ use LINE\LINEBot\HTTPClient;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
-
+include("./flex.php");
 
 $factory = (new Factory)
   ->withServiceAccount('./secret/readsid-5a802-d428a33cbfdc.json')
