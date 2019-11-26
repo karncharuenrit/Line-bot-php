@@ -9,6 +9,32 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use LINE\LINEBot\MessageBuilder;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
+use LINE\LINEBot\MessageBuilder\LocationMessageBuilder;
+use LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+use LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+use LINE\LINEBot\ImagemapActionBuilder;
+use LINE\LINEBot\ImagemapActionBuilder\AreaBuilder;
+use LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder;
+use LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder;
+use LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder;
+use LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder;
+use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
+use LINE\LINEBot\TemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\DatetimePickerTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuilder;
 
 include("./flex.php");
 
@@ -167,52 +193,6 @@ if ($message == "c1553") {
 }
 
 
-$textReplyMessage = new CarouselContainerBuilder(
-  array(
-      new BubbleContainerBuilder(
-          "ltr",  // กำหนด NULL หรือ "ltr" หรือ "rtl"
-          NULL,NULL,
-          new BoxComponentBuilder(
-              "horizontal",
-              array(
-                  new TextComponentBuilder("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.",NULL,NULL,NULL,NULL,NULL,true)
-              )
-          ),
-          new BoxComponentBuilder(
-              "horizontal",
-              array(
-                  new ButtonComponentBuilder(
-                      new UriTemplateActionBuilder("GO","http://niik.in"),
-                      NULL,NULL,NULL,"primary"
-                  )
-              )
-          )
-      ), // end bubble 1
-      new BubbleContainerBuilder(
-          "ltr",  // กำหนด NULL หรือ "ltr" หรือ "rtl"
-          NULL,NULL,
-          new BoxComponentBuilder(
-              "horizontal",
-              array(
-                  new TextComponentBuilder("Hello, World!",NULL,NULL,NULL,NULL,NULL,true)
-              )
-          ),
-          new BoxComponentBuilder(
-              "horizontal",
-              array(
-                  new ButtonComponentBuilder(
-                      new UriTemplateActionBuilder("GO","http://niik.in"),
-                      NULL,NULL,NULL,"primary"
-                  )
-              )
-          )
-      ) // end bubble 2       
-  )
-);
-$replyData = new FlexMessageBuilder("Flex",$textReplyMessage);
- 
-
 
 // //if (sizeof($request_array['events']) > 0) {
 
@@ -282,11 +262,17 @@ function replyMsg($arrayHeader, $arrayPostData)
 }
 exit;
 
+$response = $bot->replyMessage($replyToken, $replyData);
+if ($response->isSucceeded()) {
+  echo 'Succeeded!';
+  return;
+}
+
 
 
 ?>
 
-<!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
+    <!-- // $message = $arrayJson['events'][0]['message']['text']; //รับข้อความจากผู้ใช้
 // $id = $arrayJson['events'][0]['source']['userId']; //recive id form user 
 $reply_messages = '';
 $messages = [];
